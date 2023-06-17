@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react"
 import { getCurrentConditions, getLocationKey } from "../api/accuWeatherApi"
-import { Col, Input, Row, AutoComplete } from "antd"
 import Swal from "sweetalert2"
 
+//ANTD
+import { Col, Input, Row, AutoComplete, Segmented, Radio, Divider } from "antd"
 const { Search } = Input
 
 
 const Header = ({ setCurrentConditionsData }) => {
+
     const [isLoading, setIsLoading] = useState(false)
     const [citySelectedName, setCitySelectedName] = useState('')
     const [locationOptions, setLocationOptions] = useState([])
+    const [gradeSelected, setGradeSelected] = useState('°C')
 
+    // const typesTemperatureGrades = ['°C', '°F'];
 
     const optionsCities = locationOptions?.map((location) => ({
         /*
@@ -31,14 +35,16 @@ const Header = ({ setCurrentConditionsData }) => {
         }
     }, [citySelectedName])
 
-    console.log('CITY >', citySelectedName)
 
     const currentConditions = async () => {
         setIsLoading(true)
 
         const citySelectedNameSplit = citySelectedName?.split(',')
 
-        const citySelectedObj = locationOptions.filter(location => location.LocalizedName === citySelectedNameSplit[0] && location.Country.LocalizedName === citySelectedNameSplit[1].trim())
+        const citySelectedObj = locationOptions.filter(location =>
+            location.LocalizedName === citySelectedNameSplit[0] &&
+            location.Country.LocalizedName === citySelectedNameSplit[1].trim()
+        )
 
         const citySelectedKey = citySelectedObj[0]?.Key
 
@@ -60,8 +66,8 @@ const Header = ({ setCurrentConditionsData }) => {
     const searchLocations = async (location) => {
         if (location && location.trim() !== '') {
             setIsLoading(true)
+
             const resp = await getLocationKey(location)
-            console.log('RESP >', resp)
 
             if (resp.status === 200) {
                 const cities = resp.data
@@ -91,10 +97,19 @@ const Header = ({ setCurrentConditionsData }) => {
 
     return (
         <Row justify={{ sm: 'space-between' }} align={{ xs: 'stretch', sm: 'bottom' }}>
-            <Col xs={24} sm={4} align='center'>
-                <img height={80} width={80} src="climaapp.png" alt="logo climaapp" />
+            <Col xs={12} sm={4} align='left'>
+                <img id="logoClimaap" src="climaapp.png" alt="logo climaapp" />
             </Col>
-            <Col xs={18} sm={16}>
+            <Col span={12} align='right' className="d-none-desktop center-auto-margin">
+                <Radio.Group
+                    value={gradeSelected}
+                    onChange={(e) => { setGradeSelected(e.target.value); }}
+                >
+                    <Radio.Button value="°C">°C</Radio.Button>
+                    <Radio.Button value="°F">°F</Radio.Button>
+                </Radio.Group>
+            </Col>
+            <Col xs={24} sm={16}>
                 <AutoComplete
                     style={{ width: '100%' }}
                     value={citySelectedName}
@@ -110,9 +125,16 @@ const Header = ({ setCurrentConditionsData }) => {
                     />
                 </AutoComplete>
             </Col>
-            <Col xs={6} sm={4} align='center'>
-                <h2>°C</h2>
+            <Col span={4} align='center' className="d-none-mobile">
+                <Radio.Group
+                    value={gradeSelected}
+                    onChange={(e) => { setGradeSelected(e.target.value); }}
+                >
+                    <Radio.Button value="°C">°C</Radio.Button>
+                    <Radio.Button value="°F">°F</Radio.Button>
+                </Radio.Group>
             </Col>
+            <Divider />
         </Row>
     )
 }

@@ -1,20 +1,23 @@
+
 import { useState } from "react"
+//ANTD
+import { ConfigProvider, theme } from "antd"
+const { darkAlgorithm } = theme
+//COMPONENTS
 import Header from "./Header"
-import PrincipalWeatherCard from "./PrincipalWeatherCard"
-import { Divider } from "antd"
+import WeatherInformation from "./WeatherInformation"
+
 
 const App = () => {
     const [currentConditionsData, setCurrentConditionsData] = useState({})
 
-
     return (
-        <>
+        <ConfigProvider theme={{ algorithm: darkAlgorithm }}>
             <Header setCurrentConditionsData={setCurrentConditionsData} />
             <main>
-                <Divider />
-                <PrincipalWeatherCard currentConditionsData={currentConditionsData} />
+                <WeatherInformation currentConditionsData={currentConditionsData} />
             </main>
-        </>
+        </ConfigProvider>
     )
 }
 

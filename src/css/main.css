@@ -1,13 +1,97 @@
+/* ID */
+#logoClimaap{
+    height: 60px;
+    width: 60px;
+}
+/* ------------------------------------------------------------------- */
+
+
 body{
+    background-color: #111a2c;
+    color: #eef0f1;
     margin-left: 16vw;
     margin-right: 16vw;
-    background-color: #323a3e;
-    color: #eef0f1;
 }
+
+.center-auto-margin{
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
+.cover-img{
+    border-radius: 8px;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.short-container{
+    height: 30vh;
+    margin-bottom: 1rem;
+    width: 60vw;
+}
+
+.border-center{
+    background-color: #161d40;
+    border: 1px solid #1668dc;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    padding: .2rem;
+    text-align: center;
+}
+
+.text-over-top-right{
+    font-size: 2rem;
+    font-weight: bold;
+    left: 40px;
+    position: absolute;
+    text-shadow: 1px 2px 10px #000;
+    top: 20px;
+}
+
+.img-over-top-left{
+    bottom: 20px;
+    position: absolute;
+    right: 40px;
+}
+
+.d-none-mobile{
+    display: block;
+}
+
+.d-none-desktop{
+    display: none;
+}
+
 
 @media screen and (max-width:576px) {
     body{
         margin-left: 2vw;
         margin-right: 2vw;
+    }
+    .short-container{
+        height: 20vh;
+        width: 90vw;
+    }
+    .img-over-top-left{
+        bottom: 10px;
+        height: 80px;
+        right: 20px;
+        width: 80px;
+    }
+    .text-over-top-right{
+        font-size: 1.6rem;
+        left: 20px;
+        top: 10px;
+    }
+    .d-none-desktop{
+        display: inline;
+    }
+    .d-none-mobile{
+        display: none;
+    }
+    #logoClimaap{
+        margin-bottom: 1rem;
+        margin-top: 1rem;
     }
 }
