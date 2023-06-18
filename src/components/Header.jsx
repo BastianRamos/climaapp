@@ -3,42 +3,39 @@ import { getCurrentConditions, getLocationKey } from "../api/accuWeatherApi"
 import Swal from "sweetalert2"
 
 //ANTD
-import { Col, Input, Row, AutoComplete, Segmented, Radio, Divider } from "antd"
+import { Col, Input, Row, AutoComplete, Radio, Divider } from "antd"
 const { Search } = Input
 
 
 const Header = ({ setCurrentConditionsData }) => {
-
     const [isLoading, setIsLoading] = useState(false)
     const [citySelectedName, setCitySelectedName] = useState('')
+    const [inputLocation, setInputLocation] = useState('')
     const [locationOptions, setLocationOptions] = useState([])
     const [gradeSelected, setGradeSelected] = useState('°C')
 
-    // const typesTemperatureGrades = ['°C', '°F'];
-
     const optionsCities = locationOptions?.map((location) => ({
-        /*
-        > Creamos unas opciones personalizadas para el Autocomplete con el array obtenido de la API location key.
-        > Mostramos el nombre de la ciudad y su país de acuerdo al listado obtenido con la localidad ingresada por el usuario.
-        */
+        /* > Creamos unas opciones personalizadas para el Autocomplete con el array obtenido de 
+        la API location key.
+        > Mostramos el nombre de la ciudad y su país de acuerdo al listado obtenido con la 
+        localidad ingresada por el usuario.*/
         value: `${location.LocalizedName}, ${location.Country.LocalizedName}`,
         label: `${location.LocalizedName}, ${location.Country.LocalizedName}`
     }))
 
 
     useEffect(() => {
-        // Cuando el usuario seleccione una ciudad del listado buscaremos las condiciones climaticas actuales del lugar.
-        if (locationOptions.length > 0 && citySelectedName && citySelectedName !== '') {
+        /* Cuando el usuario seleccione una ciudad del listado buscaremos las condiciones climáticas
+         actuales del lugar.*/
+        if (locationOptions.length > 0 && citySelectedName && citySelectedName !== '')
             currentConditions()
-        } else {
+        else
             setIsLoading(false)
-        }
     }, [citySelectedName])
 
 
     const currentConditions = async () => {
         setIsLoading(true)
-
         const citySelectedNameSplit = citySelectedName?.split(',')
 
         const citySelectedObj = locationOptions.filter(location =>
@@ -47,12 +44,12 @@ const Header = ({ setCurrentConditionsData }) => {
         )
 
         const citySelectedKey = citySelectedObj[0]?.Key
-
         const resp = await getCurrentConditions(citySelectedKey)
+
         if (resp?.status === 200) {
             const cityCurrentConditions = resp.data[0]
             setCurrentConditionsData(cityCurrentConditions)
-        } else if (resp) {
+        } else {
             Swal.fire({
                 icon: 'error',
                 title: 'Problemas de Conexión',
@@ -66,31 +63,27 @@ const Header = ({ setCurrentConditionsData }) => {
     const searchLocations = async (location) => {
         if (location && location.trim() !== '') {
             setIsLoading(true)
-
             const resp = await getLocationKey(location)
 
             if (resp.status === 200) {
                 const cities = resp.data
 
-                if (cities.length > 0) {
-                    setIsLoading(false)
+                if (cities.length > 0)
                     setLocationOptions(cities)
-                } else {
-                    setIsLoading(false)
+                else
                     Swal.fire({
                         icon: 'info',
                         title: 'Ciudad No Encontrada',
                         text: 'Vuelve a intentarlo y verifica que el lugar que buscas este escrito correctamente.'
                     })
-                }
             } else {
-                setIsLoading(false)
                 Swal.fire({
                     icon: 'error',
                     title: 'Problemas de Conexión',
                     text: 'Tenemos problemas para acceder al listado de las ciudades en estos momentos.'
                 })
             }
+            setIsLoading(false)
         }
     }
 
@@ -112,9 +105,10 @@ const Header = ({ setCurrentConditionsData }) => {
             <Col xs={24} sm={16}>
                 <AutoComplete
                     style={{ width: '100%' }}
-                    value={citySelectedName}
+                    value={inputLocation}
                     options={locationOptions?.length > 0 && optionsCities}
-                    onChange={(value) => setCitySelectedName(value)}
+                    onSelect={(value) => setCitySelectedName(value)}
+                    onChange={(value) => setInputLocation(value)}
                 >
                     <Search
                         placeholder="Ingrese una ciudad"

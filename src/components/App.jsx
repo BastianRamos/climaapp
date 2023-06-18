@@ -1,11 +1,10 @@
 
 import { useState } from "react"
+import Header from "./Header"
+import WeatherInformation from "./WeatherInformation"
 //ANTD
 import { ConfigProvider, theme } from "antd"
 const { darkAlgorithm } = theme
-//COMPONENTS
-import Header from "./Header"
-import WeatherInformation from "./WeatherInformation"
 
 
 const App = () => {
