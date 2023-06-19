@@ -5,7 +5,7 @@ import { Col, Typography } from 'antd'
 
 const IlustratedWeatherState = ({ weatherState }) => {
     console.log('STATE >', weatherState)
-    const [weatherImg, setWeatherImg] = useState('')
+    const [weatherImg, setWeatherImg] = useState('weather-states/all-weathers.jpg')
     const [weatherIcon, setWeatherIcon] = useState('')
     console.log(weatherImg, weatherIcon)
 
@@ -45,11 +45,14 @@ const IlustratedWeatherState = ({ weatherState }) => {
                 src={weatherImg}
                 alt="Imagen referencial del estado del clima actual."
             />
-            <img
-                src={weatherIcon}
-                className="icon-over-bottom-right"
-                alt="Icono ilustrativo del estado del clima actual."
-            />
+            {
+                weatherIcon &&
+                <img
+                    src={weatherIcon}
+                    className="icon-over-bottom-right"
+                    alt="Icono ilustrativo del estado del clima actual."
+                />
+            }
             <Typography className="text-over-top-left">
                 {weatherState}
             </Typography>
