@@ -19,7 +19,7 @@ const IlustratedWeatherState = ({ weatherState }) => {
             setWeatherImg('weather-states/despejado.jpg')
             setWeatherIcon('icons/despejado.png')
         }
-        if (weatherState === 'Nublado') {
+        if (weatherState === 'Nublado' || weatherState === 'Mayormente nublado') {
             setWeatherImg('weather-states/nublado.jpg')
             setWeatherIcon('icons/nublado.png')
         }
@@ -27,9 +27,13 @@ const IlustratedWeatherState = ({ weatherState }) => {
             setWeatherImg('weather-states/parcialmente-nublado.jpg')
             setWeatherIcon('icons/parcialmente-nublado.png')
         }
-        if (weatherState === 'Niebla leve' || weatherState === 'Niebla densa') {
+        if (weatherState === 'Niebla leve' || weatherState === 'Niebla densa' || weatherState === 'Soleado con bruma') {
             setWeatherImg('weather-states/niebla-leve.jpg')
             setWeatherIcon('icons/niebla.png')
+        }
+        if (weatherState === 'Chaparrón') {
+            setWeatherImg('weather-states/lluvia.jpg')
+            setWeatherIcon('icons/lluvia.png')
         }
     }, [weatherState])
 

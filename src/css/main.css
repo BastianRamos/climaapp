@@ -7,14 +7,18 @@
 
 
 body{
-    background-color: #111a2c;
+    background: rgb(1,17,64);
+    background: -moz-radial-gradient(circle, rgba(1,17,64,1) 0%, rgba(0,6,11,1) 100%);
+    background: -webkit-radial-gradient(circle, rgba(1,17,64,1) 0%, rgba(0,6,11,1) 100%);
+    background: radial-gradient(circle, rgba(1,17,64,1) 0%, rgba(0,6,11,1) 100%); 
     color: #eef0f1;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#011140",endColorstr="#00060b",GradientType=1);
     margin-left: 16vw;
     margin-right: 16vw;
 }
 
 .font-medium{
-    font-size: 1.2rem;
+    font-size: 1.4rem;
 }
 
 .center-auto-margin{
@@ -102,7 +106,7 @@ body{
         height: 10vh;
     }
     .font-medium{
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
     #logoClimaap{
         margin-bottom: 1rem;
