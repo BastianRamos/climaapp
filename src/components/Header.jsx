@@ -65,7 +65,7 @@ const Header = ({ setCurrentConditionsData }) => {
             setIsLoading(true)
             const resp = await getLocationKey(location)
 
-            if (resp.status === 200) {
+            if (resp?.status === 200) {
                 const cities = resp.data
 
                 if (cities.length > 0)

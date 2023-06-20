@@ -7,7 +7,7 @@ export const getLocationKey = (location) => {
     if (location) {
         const locationReplaceSpaces = location.trim().replace(/\s/g, '%20')
         const URL = 'http://dataservice.accuweather.com/locations/v1/cities/autocomplete?'
-        return axios.get(`${URL}apikey=${API_KEY}&q=${locationReplaceSpaces}&languague=es-CL`)
+        return axios.get(`${URL}apikey=${API_KEY}&q=${locationReplaceSpaces}&language=es-CL`)
     }
 }
 
