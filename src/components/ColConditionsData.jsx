@@ -4,8 +4,8 @@ import { Col, Typography } from "antd"
 
 const ColConditionsData = ({ title, value, valueSymbol }) => {
     return (
-        <Col xs={11} sm={5} className="border-text-center">
-            <Typography >{title}</Typography>
+        <Col xs={11} sm={5} className="card-weather-information">
+            <Typography.Text>{title}</Typography.Text>
             <Typography.Text strong className='font-medium'>{value} {valueSymbol}</Typography.Text>
         </Col>
     )

@@ -15,10 +15,12 @@ const Header = ({ setCurrentConditionsData }) => {
     const [gradeSelected, setGradeSelected] = useState('°C')
 
     const optionsCities = locationOptions?.map((location) => ({
-        /* > Creamos unas opciones personalizadas para el Autocomplete con el array obtenido de 
+        /* 
+        > Creamos unas opciones personalizadas para el Autocomplete con el array obtenido de 
         la API location key.
         > Mostramos el nombre de la ciudad y su país de acuerdo al listado obtenido con la 
-        localidad ingresada por el usuario.*/
+        localidad ingresada por el usuario.
+        */
         value: `${location.LocalizedName}, ${location.Country.LocalizedName}`,
         label: `${location.LocalizedName}, ${location.Country.LocalizedName}`
     }))
@@ -74,7 +76,7 @@ const Header = ({ setCurrentConditionsData }) => {
                     Swal.fire({
                         icon: 'info',
                         title: 'Ciudad No Encontrada',
-                        text: 'Vuelve a intentarlo y verifica que el lugar que buscas este escrito correctamente.'
+                        text: 'Vuelve a intentarlo y verifica que la ciudad que buscas este escrita correctamente. "Sólo escribir la ciudad".'
                     })
             } else {
                 Swal.fire({
