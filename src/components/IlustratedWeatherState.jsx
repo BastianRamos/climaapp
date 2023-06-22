@@ -4,10 +4,8 @@ import { Col, Typography } from 'antd'
 
 
 const IlustratedWeatherState = ({ weatherState }) => {
-    console.log('STATE >', weatherState)
     const [weatherImg, setWeatherImg] = useState('weather-states/all-weathers.jpg')
     const [weatherIcon, setWeatherIcon] = useState('')
-    console.log(weatherImg, weatherIcon)
 
 
     useEffect(() => {
@@ -31,7 +29,7 @@ const IlustratedWeatherState = ({ weatherState }) => {
             setWeatherImg('weather-states/niebla-leve.jpg')
             setWeatherIcon('icons/niebla.png')
         }
-        if (weatherState === 'Chaparrón') {
+        if (weatherState === 'Chaparrón' || weatherState === 'Lluvias') {
             setWeatherImg('weather-states/lluvia.jpg')
             setWeatherIcon('icons/lluvia.png')
         }
