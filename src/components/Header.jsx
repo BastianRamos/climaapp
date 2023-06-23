@@ -64,8 +64,15 @@ const Header = ({ setCurrentConditionsData }) => {
 
     const searchLocations = async (location) => {
         if (location && location.trim() !== '') {
+            let onlyLocation = location
+
+            if (location.includes(',')) {
+                const indexComma = location.indexOf(',')
+                onlyLocation = location.substring(0, indexComma)
+            }
+
             setIsLoading(true)
-            const resp = await getLocationKey(location)
+            const resp = await getLocationKey(onlyLocation)
 
             if (resp?.status === 200) {
                 const cities = resp.data

@@ -1,37 +1,40 @@
 import { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
 import { Col, Typography } from 'antd'
 
 
 const IlustratedWeatherState = ({ weatherState }) => {
-    const [weatherImg, setWeatherImg] = useState('weather-states/all-weathers.jpg')
-    const [weatherIcon, setWeatherIcon] = useState('')
+    const [weatherImg, setWeatherImg] = useState('weather-states/all-weathers.webp')
+    const [weatherIcon, setWeatherIcon] = useState('icons/estaciones.png')
 
 
     useEffect(() => {
         if (weatherState === 'Mayormente despejado' || weatherState === 'Algunas nubes' || weatherState === 'Mayormente soleado') {
-            setWeatherImg('weather-states/mayormente-despejado.jpg')
+            setWeatherImg('weather-states/mayormente-despejado.webp')
             setWeatherIcon('icons/soleado.png')
         }
         if (weatherState === 'Despejado' || weatherState === 'Soleado') {
-            setWeatherImg('weather-states/despejado.jpg')
+            setWeatherImg('weather-states/despejado.webp')
             setWeatherIcon('icons/despejado.png')
         }
         if (weatherState === 'Nublado' || weatherState === 'Mayormente nublado') {
-            setWeatherImg('weather-states/nublado.jpg')
+            setWeatherImg('weather-states/nublado.webp')
             setWeatherIcon('icons/nublado.png')
         }
         if (weatherState === 'Parcialmente nublado' || weatherState === 'Parcialmente soleado' || weatherState === 'Nubes y sol') {
-            setWeatherImg('weather-states/parcialmente-nublado.jpg')
+            setWeatherImg('weather-states/parcialmente-nublado.webp')
             setWeatherIcon('icons/parcialmente-nublado.png')
         }
         if (weatherState === 'Niebla leve' || weatherState === 'Niebla densa' || weatherState === 'Soleado con bruma') {
-            setWeatherImg('weather-states/niebla-leve.jpg')
+            setWeatherImg('weather-states/niebla-leve.webp')
             setWeatherIcon('icons/niebla.png')
         }
-        if (weatherState === 'Chaparrón' || weatherState === 'Lluvias') {
-            setWeatherImg('weather-states/lluvia.jpg')
+        if (weatherState === 'Chaparrón' || weatherState === 'Lluvias' || weatherState === 'Chaparrones') {
+            setWeatherImg('weather-states/lluvia.webp')
             setWeatherIcon('icons/lluvia.png')
+        }
+        if (weatherState === 'Lluvias y nevadas') {
+            setWeatherImg('weather-states/lluvia-nieve.webp')
+            setWeatherIcon('icons/nieve.png')
         }
     }, [weatherState])
 
@@ -52,14 +55,10 @@ const IlustratedWeatherState = ({ weatherState }) => {
                 />
             }
             <Typography className="text-over-top-left">
-                {weatherState}
+                {weatherState ?? 'Información climática gracias a AccuWeather.'}
             </Typography>
         </Col>
     )
-}
-
-IlustratedWeatherState.propTypes = {
-    weatherState: PropTypes.string.isRequired
 }
 
 export default IlustratedWeatherState
