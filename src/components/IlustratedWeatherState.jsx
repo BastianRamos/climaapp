@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Col, Typography } from 'antd'
+import { newDateDayMonthYYYY } from '../utils/dateFormat'
 
 
 const IlustratedWeatherState = ({ weatherState }) => {
     const [weatherImg, setWeatherImg] = useState('weather-states/all-weathers.webp')
     const [weatherIcon, setWeatherIcon] = useState('icons/estaciones.png')
+    const toDay = newDateDayMonthYYYY()
 
 
     useEffect(() => {
@@ -40,24 +42,32 @@ const IlustratedWeatherState = ({ weatherState }) => {
 
 
     return (
-        <Col span={24} className="short-container">
-            <img
-                className="cover-img"
-                src={weatherImg}
-                alt="Imagen referencial del estado del clima actual."
-            />
-            {
-                weatherIcon &&
+        <>
+            <Col span={24} className="short-container">
                 <img
-                    src={weatherIcon}
-                    className="icon-over-bottom-right"
-                    alt="Icono ilustrativo del estado del clima actual."
+                    className="cover-img"
+                    src={weatherImg}
+                    alt="Imagen referencial del estado del clima actual."
                 />
-            }
-            <Typography className="text-over-top-left">
-                {weatherState ?? 'Información climática gracias a AccuWeather.'}
-            </Typography>
-        </Col>
+                {
+                    weatherIcon &&
+                    <img
+                        src={weatherIcon}
+                        className="icon-over-bottom-right"
+                        alt="Icono ilustrativo del estado del clima actual."
+                    />
+                }
+                <Typography className="text-over-top-left">
+                    {weatherState ?? 'Información climática gracias a AccuWeather.'}
+                </Typography>
+            </Col>
+
+            <Col span={24} align='center'>
+                <Typography.Paragraph strong>
+                    {toDay}
+                </Typography.Paragraph>
+            </Col>
+        </>
     )
 }
 

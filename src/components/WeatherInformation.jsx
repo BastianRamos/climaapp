@@ -3,17 +3,23 @@ import ColConditionsData from "./ColConditionsData"
 import IlustratedWeatherState from "./IlustratedWeatherState"
 
 
-const WeatherInformation = ({ currentConditionsData }) => {
-    const weatherState = currentConditionsData?.WeatherText
+const WeatherInformation = ({ currentConditionsData, gradeSelected }) => {
+    const isDay = currentConditionsData?.IsDayTime
     const uvLevel = currentConditionsData?.UVIndexText
-    const temperatureRange = currentConditionsData?.TemperatureSummary?.Past6HourRange
-    const maxTemp = temperatureRange && Math.trunc(temperatureRange.Maximum.Metric.Value)
-    const minTemp = temperatureRange && Math.trunc(temperatureRange.Minimum.Metric.Value)
-    const precipitation = currentConditionsData?.HasPrecipitation ? 'Si' : 'No'
+    const cloudCover = currentConditionsData?.CloudCover
+    const weatherState = currentConditionsData?.WeatherText
     const humidity = currentConditionsData?.RelativeHumidity
+    const precipitation = currentConditionsData?.HasPrecipitation ? 'Si' : 'No'
     const windSpeed = currentConditionsData.Wind && Math.trunc(currentConditionsData.Wind.Speed.Metric.Value)
     const visibility = currentConditionsData.Visibility && Math.trunc(currentConditionsData.Visibility.Metric.Value)
-    const cloudCover = currentConditionsData?.CloudCover
+
+    // TEMPERATURES
+    const temperatureRange = currentConditionsData?.TemperatureSummary?.Past6HourRange
+    const maxTempC = temperatureRange && Math.trunc(temperatureRange.Maximum.Metric.Value)
+    const minTempC = temperatureRange && Math.trunc(temperatureRange.Minimum.Metric.Value)
+    const maxTempF = temperatureRange && Math.trunc(temperatureRange.Maximum.Imperial.Value)
+    const minTempF = temperatureRange && Math.trunc(temperatureRange.Minimum.Imperial.Value)
+    // -------------------------------------------------------------------------------------------------
 
     return (
         <Row justify="space-between">
@@ -21,13 +27,13 @@ const WeatherInformation = ({ currentConditionsData }) => {
 
             <ColConditionsData
                 title="Máxima"
-                value={maxTemp}
-                valueSymbol="°C"
+                value={gradeSelected === '°C' ? maxTempC : maxTempF}
+                valueSymbol={gradeSelected}
             />
             <ColConditionsData
                 title="Mínima"
-                value={minTemp}
-                valueSymbol="°C"
+                value={gradeSelected === '°C' ? minTempC : minTempF}
+                valueSymbol={gradeSelected}
             />
             <ColConditionsData
                 title="Nivel de UV"

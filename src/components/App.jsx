@@ -9,12 +9,20 @@ const { darkAlgorithm } = theme
 
 const App = () => {
     const [currentConditionsData, setCurrentConditionsData] = useState({})
+    const [gradeSelected, setGradeSelected] = useState('°C')
 
     return (
         <ConfigProvider theme={{ algorithm: darkAlgorithm }}>
-            <Header setCurrentConditionsData={setCurrentConditionsData} />
+            <Header
+                setCurrentConditionsData={setCurrentConditionsData}
+                gradeSelected={gradeSelected}
+                setGradeSelected={setGradeSelected}
+            />
             <main>
-                <WeatherInformation currentConditionsData={currentConditionsData} />
+                <WeatherInformation
+                    currentConditionsData={currentConditionsData}
+                    gradeSelected={gradeSelected}
+                />
             </main>
         </ConfigProvider>
     )

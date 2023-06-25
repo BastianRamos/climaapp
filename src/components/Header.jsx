@@ -7,12 +7,11 @@ import { Col, Input, Row, AutoComplete, Radio, Divider } from "antd"
 const { Search } = Input
 
 
-const Header = ({ setCurrentConditionsData }) => {
+const Header = ({ setCurrentConditionsData, gradeSelected, setGradeSelected }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [citySelectedName, setCitySelectedName] = useState('')
     const [inputLocation, setInputLocation] = useState('')
     const [locationOptions, setLocationOptions] = useState([])
-    const [gradeSelected, setGradeSelected] = useState('°C')
 
     const optionsCities = locationOptions?.map((location) => ({
         /* 
