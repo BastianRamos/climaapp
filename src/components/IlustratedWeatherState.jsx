@@ -4,15 +4,15 @@ import { newDateDayMonthYYYY } from '../utils/dateFormat'
 
 
 const IlustratedWeatherState = ({ weatherState }) => {
-    const [weatherImg, setWeatherImg] = useState('weather-states/all-weathers.webp')
     const [weatherIcon, setWeatherIcon] = useState('icons/estaciones.png')
+    const [weatherImg, setWeatherImg] = useState('weather-states/all-weathers.webp')
     const toDay = newDateDayMonthYYYY()
 
 
     useEffect(() => {
-        if (weatherState === 'Mayormente despejado' || weatherState === 'Algunas nubes' || weatherState === 'Mayormente soleado') {
-            setWeatherImg('weather-states/mayormente-despejado.webp')
-            setWeatherIcon('icons/soleado.png')
+        if (weatherState === 'Lluvias y nevadas') {
+            setWeatherImg('weather-states/lluvia-nieve.webp')
+            setWeatherIcon('icons/nieve.png')
         }
         if (weatherState === 'Despejado' || weatherState === 'Soleado') {
             setWeatherImg('weather-states/despejado.webp')
@@ -22,21 +22,21 @@ const IlustratedWeatherState = ({ weatherState }) => {
             setWeatherImg('weather-states/nublado.webp')
             setWeatherIcon('icons/nublado.png')
         }
-        if (weatherState === 'Parcialmente nublado' || weatherState === 'Parcialmente soleado' || weatherState === 'Nubes y sol') {
-            setWeatherImg('weather-states/parcialmente-nublado.webp')
-            setWeatherIcon('icons/parcialmente-nublado.png')
+        if (weatherState === 'Chaparrón' || weatherState === 'Lluvias' || weatherState === 'Chaparrones') {
+            setWeatherImg('weather-states/lluvia.webp')
+            setWeatherIcon('icons/lluvia.png')
         }
         if (weatherState === 'Niebla leve' || weatherState === 'Niebla densa' || weatherState === 'Soleado con bruma') {
             setWeatherImg('weather-states/niebla-leve.webp')
             setWeatherIcon('icons/niebla.png')
         }
-        if (weatherState === 'Chaparrón' || weatherState === 'Lluvias' || weatherState === 'Chaparrones') {
-            setWeatherImg('weather-states/lluvia.webp')
-            setWeatherIcon('icons/lluvia.png')
+        if (weatherState === 'Mayormente despejado' || weatherState === 'Algunas nubes' || weatherState === 'Mayormente soleado') {
+            setWeatherImg('weather-states/mayormente-despejado.webp')
+            setWeatherIcon('icons/soleado.png')
         }
-        if (weatherState === 'Lluvias y nevadas') {
-            setWeatherImg('weather-states/lluvia-nieve.webp')
-            setWeatherIcon('icons/nieve.png')
+        if (weatherState === 'Parcialmente nublado' || weatherState === 'Parcialmente soleado' || weatherState === 'Nubes y sol') {
+            setWeatherImg('weather-states/parcialmente-nublado.webp')
+            setWeatherIcon('icons/parcialmente-nublado.png')
         }
     }, [weatherState])
 

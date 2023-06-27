@@ -4,7 +4,7 @@ import IlustratedWeatherState from "./IlustratedWeatherState"
 
 
 const WeatherInformation = ({ currentConditionsData, gradeSelected }) => {
-    const isDay = currentConditionsData?.IsDayTime
+    // const isDay = currentConditionsData?.IsDayTime <------------------------------------ USAR
     const uvLevel = currentConditionsData?.UVIndexText
     const cloudCover = currentConditionsData?.CloudCover
     const weatherState = currentConditionsData?.WeatherText
@@ -20,6 +20,7 @@ const WeatherInformation = ({ currentConditionsData, gradeSelected }) => {
     const maxTempF = temperatureRange && Math.trunc(temperatureRange.Maximum.Imperial.Value)
     const minTempF = temperatureRange && Math.trunc(temperatureRange.Minimum.Imperial.Value)
     // -------------------------------------------------------------------------------------------------
+
 
     return (
         <Row justify="space-between">
