@@ -12,10 +12,6 @@ const App = () => {
     const [api, contextHolder] = notification.useNotification()
     const [currentConditionsData, setCurrentConditionsData] = useState({})
     const [gradeSelected, setGradeSelected] = useState('°C')
-    const [cordinates, setCordinates] = useState(undefined)
-    const [errorCordinates, setErrorCordinates] = useState(undefined)
-    // console.log('*** CORDENADAS: ', cordinates)
-    // console.log('*** ERROR: ', errorCordinates)
 
     const OPTIONS_GEOLOCATION = {
         enableHighAccuracy: true,
@@ -26,10 +22,9 @@ const App = () => {
     const successGeolocation = (position) => {
         if (position) {
             const cordinates = position.coords
-            setCordinates({ lat: cordinates.latitude, long: cordinates.longitude })
             return api.success({
                 message: 'Acceso a ubicación',
-                description: cordinates,
+                description: `LAT: ${cordinates.latitude}, LONG: ${cordinates.longitude}`,
                 duration: 5
             })
         }
@@ -37,10 +32,9 @@ const App = () => {
 
     const errorGeolocation = (error) => {
         if (error) {
-            setErrorCordinates({ code: error.code, message: error.message })
             return api.warning({
                 message: 'Acceso a ubicación denegado',
-                description: 'Si desea aceptar el acceso, vuelva a cargar la página.',
+                description: 'Si desea permitir el acceso recarge la página.',
                 duration: 0
             })
         }
