@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react"
 import { getCurrentConditions, getLocationKey } from "../api/accuWeatherApi"
 import Swal from "sweetalert2"
+import useGetGeolocation from "../hooks/useGetGeolocation"
 
 //ANTD
-import { Col, Input, Row, AutoComplete, Radio, Divider } from "antd"
+import { Col, Input, Row, AutoComplete, Radio, Divider, Spin } from "antd"
 const { Search } = Input
 
 
 const Header = ({ setCurrentConditionsData, gradeSelected, setGradeSelected }) => {
+
     const [isLoading, setIsLoading] = useState(false)
-    const [citySelectedName, setCitySelectedName] = useState('')
     const [inputLocation, setInputLocation] = useState('')
     const [locationOptions, setLocationOptions] = useState([])
+    const [citySelectedName, setCitySelectedName] = useState('')
+    const { currentConditionsGeolocation, geolocationData, contextHolder, isLoading: loadingGeolocation } = useGetGeolocation()
 
     const optionsCities = locationOptions?.map((location) => ({
         /* 
@@ -28,11 +31,15 @@ const Header = ({ setCurrentConditionsData, gradeSelected, setGradeSelected }) =
     useEffect(() => {
         /* Cuando el usuario seleccione una ciudad del listado buscaremos las condiciones climáticas
          actuales del lugar.*/
-        if (locationOptions.length > 0 && citySelectedName && citySelectedName !== '')
-            currentConditions()
-        else
-            setIsLoading(false)
+        if (locationOptions.length > 0 && citySelectedName && citySelectedName !== '') currentConditions()
+        else setIsLoading(false)
     }, [citySelectedName])
+
+
+    useEffect(() => {
+        if (geolocationData) setInputLocation(geolocationData.cityAndCountry)
+        if (currentConditionsGeolocation) setCurrentConditionsData(currentConditionsGeolocation)
+    }, [geolocationData, currentConditionsGeolocation])
 
 
     const currentConditions = async () => {
@@ -98,6 +105,9 @@ const Header = ({ setCurrentConditionsData, gradeSelected, setGradeSelected }) =
 
     return (
         <Row justify={{ sm: 'space-between' }} align={{ xs: 'stretch', sm: 'bottom' }}>
+            {/* Se usa para posicionar las notificaciones de ANTD */}
+            {contextHolder}
+            {/* ------------------------------------------------- */}
             <Col xs={12} sm={4} align='left'>
                 <img id="logoClimaap" src="climaapp.png" alt="logo climaapp" />
             </Col>
@@ -105,6 +115,7 @@ const Header = ({ setCurrentConditionsData, gradeSelected, setGradeSelected }) =
                 <Radio.Group
                     value={gradeSelected}
                     onChange={(e) => { setGradeSelected(e.target.value); }}
+                    disabled={loadingGeolocation}
                 >
                     <Radio.Button value="°C">°C</Radio.Button>
                     <Radio.Button value="°F">°F</Radio.Button>
@@ -117,6 +128,7 @@ const Header = ({ setCurrentConditionsData, gradeSelected, setGradeSelected }) =
                     options={locationOptions?.length > 0 && optionsCities}
                     onSelect={(value) => setCitySelectedName(value)}
                     onChange={(value) => setInputLocation(value)}
+                    disabled={loadingGeolocation}
                 >
                     <Search
                         placeholder="Ingrese una ciudad"
@@ -131,11 +143,20 @@ const Header = ({ setCurrentConditionsData, gradeSelected, setGradeSelected }) =
                 <Radio.Group
                     value={gradeSelected}
                     onChange={(e) => { setGradeSelected(e.target.value); }}
+                    disabled={loadingGeolocation}
                 >
                     <Radio.Button value="°C">°C</Radio.Button>
                     <Radio.Button value="°F">°F</Radio.Button>
                 </Radio.Group>
             </Col>
+            {
+                loadingGeolocation &&
+                <Col span={24} align='center' style={{ paddingTop: '3rem', paddingBottom: '1rem' }} >
+                    <Spin size="large" spinning={loadingGeolocation} tip='Esperando ubicación'>
+                        <div className="content" />
+                    </Spin>
+                </Col>
+            }
             <Divider />
         </Row>
     )
