@@ -3,7 +3,13 @@ import { Col, Typography } from 'antd'
 import { newDateDayMonthYYYY } from '../utils/dateFormat'
 
 
-const IlustratedWeatherState = ({ weatherState }) => {
+const IlustratedWeatherState = ({ weatherState, gradeSelected, realFeelTemperature }) => {
+
+    const realFeel = realFeelTemperature && Math.trunc(gradeSelected === '°C'
+        ? realFeelTemperature.Metric.Value
+        : realFeelTemperature.Imperial.Value
+    )
+
     const [weatherIcon, setWeatherIcon] = useState('icons/estaciones.png')
     const [weatherImg, setWeatherImg] = useState('weather-states/all-weathers.webp')
     const toDay = newDateDayMonthYYYY()
@@ -59,6 +65,8 @@ const IlustratedWeatherState = ({ weatherState }) => {
                 }
                 <Typography className="text-over-top-left">
                     {weatherState ?? 'Información climática gracias a AccuWeather.'}
+                    <br />
+                    {realFeelTemperature && `${realFeel}${gradeSelected}`}
                 </Typography>
             </Col>
 
