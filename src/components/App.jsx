@@ -1,6 +1,7 @@
 
 import { useState } from "react"
 import Header from "./Header"
+import Footer from "./Footer"
 import WeatherInformation from "./WeatherInformation"
 //ANT DESIGN
 import { ConfigProvider, theme } from "antd"
@@ -26,6 +27,7 @@ const App = () => {
                     gradeSelected={gradeSelected}
                 />
             </main>
+            <Footer />
         </ConfigProvider>
     )
 }
