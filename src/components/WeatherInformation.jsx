@@ -14,26 +14,37 @@ const WeatherInformation = ({ currentConditionsData, gradeSelected }) => {
     const visibility = currentConditionsData.Visibility && Math.trunc(currentConditionsData.Visibility.Metric.Value)
 
     // TEMPERATURES
-    const temperatureRange = currentConditionsData?.TemperatureSummary?.Past6HourRange
-    const maxTempC = temperatureRange && Math.trunc(temperatureRange.Maximum.Metric.Value)
-    const minTempC = temperatureRange && Math.trunc(temperatureRange.Minimum.Metric.Value)
-    const maxTempF = temperatureRange && Math.trunc(temperatureRange.Maximum.Imperial.Value)
-    const minTempF = temperatureRange && Math.trunc(temperatureRange.Minimum.Imperial.Value)
+    const realFeelTemperature = currentConditionsData?.RealFeelTemperature
+    const temperatureRange = currentConditionsData?.TemperatureSummary?.Past24HourRange
+
+    const maxTemp = temperatureRange && Math.trunc(gradeSelected === '°C'
+        ? temperatureRange.Maximum.Metric.Value
+        : temperatureRange.Maximum.Imperial.Value
+    )
+
+    const minTemp = temperatureRange && Math.trunc(gradeSelected === '°C'
+        ? temperatureRange.Minimum.Metric.Value
+        : temperatureRange.Minimum.Imperial.Value
+    )
     // -------------------------------------------------------------------------------------------------
 
 
     return (
         <Row justify="space-between">
-            <IlustratedWeatherState weatherState={weatherState} />
+            <IlustratedWeatherState
+                weatherState={weatherState}
+                gradeSelected={gradeSelected}
+                realFeelTemperature={realFeelTemperature}
+            />
 
             <ColConditionsData
                 title="Máxima"
-                value={gradeSelected === '°C' ? maxTempC : maxTempF}
+                value={maxTemp}
                 valueSymbol={gradeSelected}
             />
             <ColConditionsData
                 title="Mínima"
-                value={gradeSelected === '°C' ? minTempC : minTempF}
+                value={minTemp}
                 valueSymbol={gradeSelected}
             />
             <ColConditionsData
