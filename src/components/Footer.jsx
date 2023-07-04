@@ -9,7 +9,7 @@ const Footer = () => {
                     ClimaAPP v1.7
                 </Typography.Paragraph>
                 <Typography.Paragraph type="secondary">
-                    Desarrollador por <a href="https://bastianrs.vercel.app/" target="_blank">Bastian Ramos Saumontt</a>
+                    Desarrollado por <a href="https://bastianrs.vercel.app/" target="_blank">Bastian Ramos Saumontt</a>
                 </Typography.Paragraph>
             </Col>
         </Row>

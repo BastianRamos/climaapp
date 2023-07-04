@@ -13,8 +13,9 @@ const WeatherInformation = ({ currentConditionsData, gradeSelected }) => {
     const windSpeed = currentConditionsData.Wind && Math.trunc(currentConditionsData.Wind.Speed.Metric.Value)
     const visibility = currentConditionsData.Visibility && Math.trunc(currentConditionsData.Visibility.Metric.Value)
 
+    console.log('>>>', currentConditionsData)
     // TEMPERATURES
-    const realFeelTemperature = currentConditionsData?.RealFeelTemperature
+    const currentTemperature = currentConditionsData?.ApparentTemperature
     const temperatureRange = currentConditionsData?.TemperatureSummary?.Past24HourRange
 
     const maxTemp = temperatureRange && Math.trunc(gradeSelected === '°C'
@@ -34,7 +35,8 @@ const WeatherInformation = ({ currentConditionsData, gradeSelected }) => {
             <IlustratedWeatherState
                 weatherState={weatherState}
                 gradeSelected={gradeSelected}
-                realFeelTemperature={realFeelTemperature}
+                currentTemperature={currentTemperature}
+                maxTemp={maxTemp}
             />
 
             <ColConditionsData

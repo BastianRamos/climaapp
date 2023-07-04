@@ -123,6 +123,12 @@ body{
     .font-medium{
         font-size: 1.2rem;
     }
+    .card-weather-information{
+        height: 8vh;
+        margin-bottom: .6rem;
+        padding-bottom: 0;
+        padding-top: 0;
+    }
     #logoClimaap{
         margin-bottom: 1rem;
         margin-top: 1rem;

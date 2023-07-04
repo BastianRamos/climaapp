@@ -1,13 +1,18 @@
+/* 
+----------------------------------------------------------------------
+   SE RECOMIENDA COLOCAR ESTE COMPONENTE DENTRO DE UN ROW DE ANTD
+----------------------------------------------------------------------
+*/
 import { useEffect, useState } from 'react'
 import { Col, Typography } from 'antd'
 import { newDateDayMonthYYYY } from '../utils/dateFormat'
 
 
-const IlustratedWeatherState = ({ weatherState, gradeSelected, realFeelTemperature }) => {
+const IlustratedWeatherState = ({ weatherState, gradeSelected, currentTemperature, maxTemp }) => {
 
-    const realFeel = realFeelTemperature && Math.trunc(gradeSelected === '°C'
-        ? realFeelTemperature.Metric.Value
-        : realFeelTemperature.Imperial.Value
+    const realTemperature = currentTemperature && Math.trunc(gradeSelected === '°C'
+        ? currentTemperature.Metric.Value
+        : currentTemperature.Imperial.Value
     )
 
     const [weatherIcon, setWeatherIcon] = useState('icons/estaciones.png')
@@ -66,7 +71,10 @@ const IlustratedWeatherState = ({ weatherState, gradeSelected, realFeelTemperatu
                 <Typography className="text-over-top-left">
                     {weatherState ?? 'Información climática gracias a AccuWeather.'}
                     <br />
-                    {realFeelTemperature && `${realFeel}${gradeSelected}`}
+                    {
+                        currentTemperature &&
+                        `${realTemperature < maxTemp ? realTemperature : maxTemp}${gradeSelected}`
+                    }
                 </Typography>
             </Col>
 
