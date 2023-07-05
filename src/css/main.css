@@ -8,6 +8,15 @@ body{
     margin-right: 16vw;
     margin-top: 8vh;
 }
+
+a{
+    color: rgba(255, 255, 255, 0.45) !important;
+    text-decoration: underline !important;
+}
+
+a:hover{
+    color: silver !important;
+}
 /* -------------------------------------------------------------------------------------------- */
 
 
