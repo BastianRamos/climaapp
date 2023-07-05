@@ -19,7 +19,7 @@ const App = () => {
         if (currentConditionsData) {
             const isDay = currentConditionsData.IsDayTime
 
-            if (!isDay) document.body.className = 'dayBackground'
+            if (isDay) document.body.className = 'dayBackground'
             else document.body.className = 'nightBackground'
         }
     }, [currentConditionsData])
