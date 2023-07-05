@@ -8,7 +8,7 @@ const { Search } = Input
 const { useNotification } = notification
 
 
-const Header = ({ setCurrentConditionsData, gradeSelected, setGradeSelected }) => {
+const Header = ({ setCurrentConditionsData, gradeSelected, setGradeSelected, setLoadingGeolocation }) => {
 
     const [api, contextHolder] = useNotification()
     const [isLoading, setIsLoading] = useState(false)
@@ -23,13 +23,14 @@ const Header = ({ setCurrentConditionsData, gradeSelected, setGradeSelected }) =
         isLoading: loadingGeolocation
     } = useGetGeolocation()
 
-    const optionsCities = locationOptions?.map((location) => ({
+    const optionsCities = locationOptions?.map((location, index) => ({
         /* 
         > Creamos unas opciones personalizadas para el Autocomplete con el array obtenido de 
         la API location key.
         > Mostramos el nombre de la ciudad y su país de acuerdo al listado obtenido con la 
         localidad ingresada por el usuario.
         */
+        key: index,
         value: `${location.LocalizedName}, ${location.Country.LocalizedName}`,
         label: `${location.LocalizedName}, ${location.Country.LocalizedName}`
     }))
@@ -38,15 +39,22 @@ const Header = ({ setCurrentConditionsData, gradeSelected, setGradeSelected }) =
     useEffect(() => {
         /* Cuando el usuario seleccione una ciudad del listado buscaremos las condiciones climáticas
          actuales del lugar.*/
-        if (locationOptions.length > 0 && citySelectedName && citySelectedName !== '') currentConditions()
-        else setIsLoading(false)
+        if (locationOptions.length > 0 && citySelectedName && citySelectedName !== '')
+            currentConditions()
+        else
+            setIsLoading(false)
     }, [citySelectedName])
 
 
     useEffect(() => {
-        if (geolocationData) setInputLocation(geolocationData.cityAndCountry)
-        if (currentConditionsGeolocation) setCurrentConditionsData(currentConditionsGeolocation)
-    }, [geolocationData, currentConditionsGeolocation])
+        if (geolocationData)
+            setInputLocation(geolocationData.cityAndCountry)
+
+        if (currentConditionsGeolocation)
+            setCurrentConditionsData(currentConditionsGeolocation)
+
+        setLoadingGeolocation(loadingGeolocation)
+    }, [geolocationData, currentConditionsGeolocation, loadingGeolocation])
 
 
     const currentConditions = async () => {

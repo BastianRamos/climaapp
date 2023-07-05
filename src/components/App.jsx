@@ -13,6 +13,7 @@ const App = () => {
 
     const [gradeSelected, setGradeSelected] = useState('°C')
     const [currentConditionsData, setCurrentConditionsData] = useState({})
+    const [loadingGeolocation, setLoadingGeolocation] = useState(true)
 
 
     useEffect(() => {
@@ -31,11 +32,13 @@ const App = () => {
                 setCurrentConditionsData={setCurrentConditionsData}
                 gradeSelected={gradeSelected}
                 setGradeSelected={setGradeSelected}
+                setLoadingGeolocation={setLoadingGeolocation}
             />
             <main>
                 <WeatherInformation
                     currentConditionsData={currentConditionsData}
                     gradeSelected={gradeSelected}
+                    loadingGeolocation={loadingGeolocation}
                 />
             </main>
             <Footer />

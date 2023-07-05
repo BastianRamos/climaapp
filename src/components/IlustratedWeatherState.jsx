@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { Col, Typography } from 'antd'
+import { Col, Skeleton, Typography } from 'antd'
 import { newDateDayMonthYYYY } from '../utils/dateFormat'
 
 
-const IlustratedWeatherState = ({ weatherState, gradeSelected, currentTemperature, maxTemp }) => {
+const IlustratedWeatherState = ({ weatherState, gradeSelected, currentTemperature, maxTemp, loadingGeolocation }) => {
 
     const realTemperature = currentTemperature && Math.trunc(gradeSelected === '°C'
         ? currentTemperature.Metric.Value
@@ -50,44 +50,57 @@ const IlustratedWeatherState = ({ weatherState, gradeSelected, currentTemperatur
 
     return (
         <>
-            <Col span={24} className="short-container">
-                <img
-                    className="cover-img"
-                    src={weatherImg}
-                    alt="Imagen referencial del estado del clima actual."
-                />
-                {
-                    weatherIcon &&
-                    <img
-                        src={weatherIcon}
-                        className="icon-over-bottom-right"
-                        alt="Icono ilustrativo del estado del clima actual."
+            {
+                loadingGeolocation
+                    ?
+                    <Skeleton.Image
+                        className='skeleton-ilustrated-weather'
+                        loading={loadingGeolocation}
+                        active
                     />
-                }
-                <Typography className="text-over-top-left">
-                    {weatherState}
-                    <br />
-                    {
-                        currentTemperature &&
-                        `${realTemperature < maxTemp ? realTemperature : maxTemp}${gradeSelected}`
-                    }
-                </Typography>
-            </Col>
+                    :
+                    <>
+                        <Col span={24} className="short-container">
+                            <img
+                                className="cover-img"
+                                src={weatherImg}
+                                alt="Imagen referencial del estado del clima actual."
+                            />
+                            {
+                                weatherIcon &&
+                                <img
+                                    src={weatherIcon}
+                                    className="icon-over-bottom-right"
+                                    alt="Icono ilustrativo del estado del clima actual."
+                                />
+                            }
+                            <Typography className="text-over-top-left">
+                                {weatherState}
+                                <br />
+                                {
+                                    currentTemperature &&
+                                    `${realTemperature < maxTemp ? realTemperature : maxTemp}${gradeSelected}`
+                                }
+                            </Typography>
+                        </Col>
 
-            <Col span={24} align='center'>
-                <Typography.Paragraph strong>
-                    {toDay}
-                </Typography.Paragraph>
-            </Col>
+                        <Col span={24} align='center'>
+                            <Typography.Paragraph strong>
+                                {toDay}
+                            </Typography.Paragraph>
+                        </Col>
+                    </>
+            }
         </>
     )
 }
 
 IlustratedWeatherState.propTypes = {
     weatherState: PropTypes.string,
-    gradeSelected: PropTypes.string.isRequired,
-    currentTemperature: PropTypes.number.isRequired,
-    maxTemp: PropTypes.number.isRequired
+    gradeSelected: PropTypes.string,
+    currentTemperature: PropTypes.object,
+    maxTemp: PropTypes.number,
+    loadingGeolocation: PropTypes.bool
 }
 
 IlustratedWeatherState.defaultProps = {

@@ -3,7 +3,7 @@ import ColConditionsData from "./ColConditionsData"
 import IlustratedWeatherState from "./IlustratedWeatherState"
 
 
-const WeatherInformation = ({ currentConditionsData, gradeSelected }) => {
+const WeatherInformation = ({ currentConditionsData, gradeSelected, loadingGeolocation }) => {
 
     const uvLevel = currentConditionsData?.UVIndexText
     const cloudCover = currentConditionsData?.CloudCover
@@ -36,46 +36,56 @@ const WeatherInformation = ({ currentConditionsData, gradeSelected }) => {
                 gradeSelected={gradeSelected}
                 currentTemperature={currentTemperature}
                 maxTemp={maxTemp}
+                loadingGeolocation={loadingGeolocation}
             />
 
             <ColConditionsData
                 title="Máxima"
                 value={maxTemp}
                 valueSymbol={gradeSelected}
+                loadingGeolocation={loadingGeolocation}
             />
             <ColConditionsData
                 title="Mínima"
                 value={minTemp}
                 valueSymbol={gradeSelected}
+                loadingGeolocation={loadingGeolocation}
             />
             <ColConditionsData
                 title="Nivel de UV"
                 value={uvLevel}
+                loadingGeolocation={loadingGeolocation}
             />
             <ColConditionsData
                 title="Precipitaciones"
                 value={precipitation}
+                loadingGeolocation={loadingGeolocation}
             />
-            <ColConditionsData
-                title="Humedad"
-                value={humidity}
-                valueSymbol="%"
-            />
-            <ColConditionsData
-                title="Visibilidad"
-                value={visibility}
-                valueSymbol="km"
-            />
-            <ColConditionsData
-                title="Cobertura nubosa"
-                value={cloudCover}
-                valueSymbol="%"
-            />
-            <ColConditionsData
-                title="Velocidad del viento"
-                value={windSpeed}
-                valueSymbol="km/h"
-            />
+            {
+                !loadingGeolocation &&
+                <>
+                    <ColConditionsData
+                        title="Humedad"
+                        value={humidity}
+                        valueSymbol="%"
+                    />
+                    <ColConditionsData
+                        title="Visibilidad"
+                        value={visibility}
+                        valueSymbol="km"
+                    />
+                    <ColConditionsData
+                        title="Cobertura nubosa"
+                        value={cloudCover}
+                        valueSymbol="%"
+                    />
+                    <ColConditionsData
+                        title="Velocidad del viento"
+                        value={windSpeed}
+                        valueSymbol="km/h"
+                    />
+                </>
+            }
         </Row>
     )
 }

@@ -8,11 +8,11 @@ const OPTIONS_GEOLOCATION = { enableHighAccuracy: true, maximunAge: 0 }
 
 
 const useGetGeolocation = () => {
+
     const [api, contextHolder] = useNotification()
     const [geolocationData, setGeolocationData] = useState(undefined)
     const [currentConditionsGeolocation, setCurrentConditionsGeolocation] = useState(undefined)
-    const [isLoading, setIsLoading] = useState(false)
-
+    const [isLoading, setIsLoading] = useState(true)
 
     const successGeolocation = async (position) => {
         if (position) {
@@ -69,7 +69,6 @@ const useGetGeolocation = () => {
         - denied: el usuario ha negado compartir su ubicación.
         */
         if (navigator.geolocation) {
-            setIsLoading(true)
             navigator.permissions.query({
                 name: 'geolocation'
             }).then((result) => {
