@@ -1,20 +1,27 @@
 import { useEffect, useState } from "react"
 import { getCurrentConditions, getLocationKey } from "../api/accuWeatherApi"
-import Swal from "sweetalert2"
 import useGetGeolocation from "../hooks/useGetGeolocation"
 
 //ANTD
-import { Col, Input, Row, AutoComplete, Radio, Divider, Spin } from "antd"
+import { Col, Input, Row, AutoComplete, Radio, Divider, Spin, notification } from "antd"
 const { Search } = Input
+const { useNotification } = notification
 
 
 const Header = ({ setCurrentConditionsData, gradeSelected, setGradeSelected }) => {
 
+    const [api, contextHolder] = useNotification()
     const [isLoading, setIsLoading] = useState(false)
     const [inputLocation, setInputLocation] = useState('')
     const [locationOptions, setLocationOptions] = useState([])
     const [citySelectedName, setCitySelectedName] = useState('')
-    const { currentConditionsGeolocation, geolocationData, contextHolder, isLoading: loadingGeolocation } = useGetGeolocation()
+
+    const {
+        currentConditionsGeolocation,
+        geolocationData,
+        contextHolder: notificationGeolocationHook,
+        isLoading: loadingGeolocation
+    } = useGetGeolocation()
 
     const optionsCities = locationOptions?.map((location) => ({
         /* 
@@ -58,10 +65,10 @@ const Header = ({ setCurrentConditionsData, gradeSelected, setGradeSelected }) =
             const cityCurrentConditions = resp.data[0]
             setCurrentConditionsData(cityCurrentConditions)
         } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Problemas de Conexión',
-                text: 'Tenemos problemas para acceder a la información climática en estos momentos.'
+            api.error({
+                message: 'Problemas de Conexión',
+                description: 'Tenemos problemas para acceder a la información climática en estos momentos.',
+                duration: 60
             })
         }
         setIsLoading(false)
@@ -79,23 +86,22 @@ const Header = ({ setCurrentConditionsData, gradeSelected, setGradeSelected }) =
 
             setIsLoading(true)
             const resp = await getLocationKey(onlyLocation)
-
             if (resp?.status === 200) {
                 const cities = resp.data
 
                 if (cities.length > 0)
                     setLocationOptions(cities)
                 else
-                    Swal.fire({
-                        icon: 'info',
-                        title: 'Ciudad No Encontrada',
-                        text: 'Vuelve a intentarlo y verifica que la ciudad que buscas este escrita correctamente. "Sólo escribir la ciudad".'
+                    api.info({
+                        message: 'Ciudad No Encontrada',
+                        description: 'Vuelve a intentarlo y verifica que la ciudad que buscas este escrita correctamente. "Sólo escribir la ciudad".',
+                        duration: 15
                     })
             } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Problemas de Conexión',
-                    text: 'Tenemos problemas para acceder al listado de las ciudades en estos momentos.'
+                api.error({
+                    message: 'Problemas de Conexión',
+                    description: 'Tenemos problemas para acceder al listado de las ciudades en estos momentos.',
+                    duration: 60
                 })
             }
             setIsLoading(false)
@@ -106,6 +112,7 @@ const Header = ({ setCurrentConditionsData, gradeSelected, setGradeSelected }) =
     return (
         <Row justify={{ sm: 'space-between' }} align={{ xs: 'stretch', sm: 'bottom' }}>
             {/* Se usa para posicionar las notificaciones de ANTD */}
+            {notificationGeolocationHook}
             {contextHolder}
             {/* ------------------------------------------------- */}
             <Col xs={12} sm={4} align='left'>

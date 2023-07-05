@@ -4,7 +4,7 @@ import IlustratedWeatherState from "./IlustratedWeatherState"
 
 
 const WeatherInformation = ({ currentConditionsData, gradeSelected }) => {
-    // const isDay = currentConditionsData?.IsDayTime <------------------------------------ USAR
+
     const uvLevel = currentConditionsData?.UVIndexText
     const cloudCover = currentConditionsData?.CloudCover
     const weatherState = currentConditionsData?.WeatherText
@@ -13,7 +13,6 @@ const WeatherInformation = ({ currentConditionsData, gradeSelected }) => {
     const windSpeed = currentConditionsData.Wind && Math.trunc(currentConditionsData.Wind.Speed.Metric.Value)
     const visibility = currentConditionsData.Visibility && Math.trunc(currentConditionsData.Visibility.Metric.Value)
 
-    console.log('>>>', currentConditionsData)
     // TEMPERATURES
     const currentTemperature = currentConditionsData?.ApparentTemperature
     const temperatureRange = currentConditionsData?.TemperatureSummary?.Past24HourRange

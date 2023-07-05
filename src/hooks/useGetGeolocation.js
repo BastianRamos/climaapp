@@ -34,14 +34,14 @@ const useGetGeolocation = () => {
                     api.warning({
                         message: 'Condiciones climáticas falló',
                         description: 'No hemos podido obtener información climática de la ciudad mediante el uso de geolocalización.',
-                        duration: 0
+                        duration: 60
                     })
                 }
             } else {
                 api.error({
                     message: 'Búsqueda por geolocalización falló',
                     description: 'No hemos podido obtener información climática de la ciudad mediante el uso de geolocalización.',
-                    duration: 0
+                    duration: 60
                 })
             }
             setIsLoading(false)
@@ -54,7 +54,7 @@ const useGetGeolocation = () => {
             api.warning({
                 message: 'Acceso a ubicación denegado',
                 description: 'Si desea permitir el acceso active la ubicación y recarge la página.',
-                duration: 0
+                duration: 60
             })
             setIsLoading(false)
         }
@@ -83,7 +83,7 @@ const useGetGeolocation = () => {
                     api.info({
                         message: 'Acceso a ubicación bloqueado',
                         description: 'Si desea permitir el acceso active la ubicación y recarge la página. Si continúa el problema debe revisar la configuración de su navegador.',
-                        duration: 0
+                        duration: 60
                     })
                     setIsLoading(false)
                 }
@@ -92,7 +92,7 @@ const useGetGeolocation = () => {
             api.info({
                 message: 'Navegador no compatible',
                 description: 'Este navegador no admite la función de geolocalización.',
-                duration: 0
+                duration: 60
             })
             setIsLoading(false)
         }

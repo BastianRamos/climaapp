@@ -6,7 +6,7 @@ const Footer = () => {
             <Divider />
             <Col span={24} align='center'>
                 <Typography.Paragraph type="secondary" code>
-                    ClimaAPP v1.7
+                    ClimaAPP v1.8
                 </Typography.Paragraph>
                 <Typography.Paragraph type="secondary">
                     Desarrollado por <a href="https://bastianrs.vercel.app/" target="_blank">Bastian Ramos Saumontt</a>

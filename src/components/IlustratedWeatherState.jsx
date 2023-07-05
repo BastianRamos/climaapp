@@ -1,9 +1,5 @@
-/* 
-----------------------------------------------------------------------
-   SE RECOMIENDA COLOCAR ESTE COMPONENTE DENTRO DE UN ROW DE ANTD
-----------------------------------------------------------------------
-*/
 import { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { Col, Typography } from 'antd'
 import { newDateDayMonthYYYY } from '../utils/dateFormat'
 
@@ -69,7 +65,7 @@ const IlustratedWeatherState = ({ weatherState, gradeSelected, currentTemperatur
                     />
                 }
                 <Typography className="text-over-top-left">
-                    {weatherState ?? 'Información climática gracias a AccuWeather.'}
+                    {weatherState}
                     <br />
                     {
                         currentTemperature &&
@@ -85,6 +81,17 @@ const IlustratedWeatherState = ({ weatherState, gradeSelected, currentTemperatur
             </Col>
         </>
     )
+}
+
+IlustratedWeatherState.propTypes = {
+    weatherState: PropTypes.string,
+    gradeSelected: PropTypes.string.isRequired,
+    currentTemperature: PropTypes.number.isRequired,
+    maxTemp: PropTypes.number.isRequired
+}
+
+IlustratedWeatherState.defaultProps = {
+    weatherState: 'Información climática gracias a AccuWeather.',
 }
 
 export default IlustratedWeatherState
