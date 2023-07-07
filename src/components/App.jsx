@@ -20,8 +20,10 @@ const App = () => {
         if (currentConditionsData) {
             const isDay = currentConditionsData.IsDayTime
 
-            if (isDay) document.body.className = 'dayBackground'
-            else document.body.className = 'nightBackground'
+            if (isDay)
+                document.body.className = 'dayBackground'
+            else
+                document.body.className = 'nightBackground'
         }
     }, [currentConditionsData])
 

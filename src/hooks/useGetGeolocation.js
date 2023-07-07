@@ -44,7 +44,7 @@ const useGetGeolocation = () => {
                     duration: 60
                 })
             }
-            setIsLoading(false)
+            setTimeout(() => setIsLoading(false), 2000)
         }
     }
 
@@ -56,7 +56,7 @@ const useGetGeolocation = () => {
                 description: 'Si desea permitir el acceso active la ubicación y recarge la página.',
                 duration: 60
             })
-            setIsLoading(false)
+            setTimeout(() => setIsLoading(false), 2000)
         }
     }
 
@@ -84,7 +84,7 @@ const useGetGeolocation = () => {
                         description: 'Si desea permitir el acceso active la ubicación y recarge la página. Si continúa el problema debe revisar la configuración de su navegador.',
                         duration: 60
                     })
-                    setIsLoading(false)
+                    setTimeout(() => setIsLoading(false), 2000)
                 }
             })
         } else {
@@ -93,7 +93,7 @@ const useGetGeolocation = () => {
                 description: 'Este navegador no admite la función de geolocalización.',
                 duration: 60
             })
-            setIsLoading(false)
+            setTimeout(() => setIsLoading(false), 2000)
         }
     }, [])
 
