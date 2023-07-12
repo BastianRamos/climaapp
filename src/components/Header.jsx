@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import PropTypes from 'prop-types'
 import { getCurrentConditions, getLocationKey } from "../api/accuWeatherApi"
 import useGetGeolocation from "../hooks/useGetGeolocation"
 
@@ -8,7 +9,7 @@ const { Search } = Input
 const { useNotification } = notification
 
 
-const Header = ({ setCurrentConditionsData, gradeSelected, setGradeSelected, setLoadingGeolocation }) => {
+const Header = ({ setCurrentConditionsData, setDailyForecastData, gradeSelected, setGradeSelected, setLoadingGeolocation }) => {
 
     const [api, contextHolder] = useNotification()
     const [isLoading, setIsLoading] = useState(false)
@@ -18,6 +19,7 @@ const Header = ({ setCurrentConditionsData, gradeSelected, setGradeSelected, set
 
     const {
         currentConditionsGeolocation,
+        dailyForecastGeolocation,
         geolocationData,
         contextHolder: notificationGeolocationHook,
         isLoading: loadingGeolocation
@@ -47,14 +49,14 @@ const Header = ({ setCurrentConditionsData, gradeSelected, setGradeSelected, set
 
 
     useEffect(() => {
-        if (geolocationData)
-            setInputLocation(geolocationData.cityAndCountry)
+        if (geolocationData) setInputLocation(geolocationData.cityAndCountry)
 
-        if (currentConditionsGeolocation)
-            setCurrentConditionsData(currentConditionsGeolocation)
+        if (currentConditionsGeolocation) setCurrentConditionsData(currentConditionsGeolocation)
+
+        if (dailyForecastGeolocation) setDailyForecastData(dailyForecastGeolocation)
 
         setLoadingGeolocation(loadingGeolocation)
-    }, [geolocationData, currentConditionsGeolocation, loadingGeolocation])
+    }, [geolocationData, currentConditionsGeolocation, dailyForecastGeolocation, loadingGeolocation])
 
 
     const currentConditions = async () => {
@@ -175,6 +177,10 @@ const Header = ({ setCurrentConditionsData, gradeSelected, setGradeSelected, set
             <Divider />
         </Row>
     )
+}
+
+Header.propTypes = {
+    gradeSelected: PropTypes.string.isRequired
 }
 
 export default Header

@@ -25,6 +25,7 @@ a:hover{
 .ant-spin-text{
     color: azure;
 }
+
 .nightBackground{
     background: rgb(1,17,64);
     background: -moz-radial-gradient(circle, rgba(1,17,64,1) 0%, rgba(0,6,11,1) 100%);
@@ -104,6 +105,13 @@ a:hover{
 .skeleton-ilustrated-weather{
     margin-bottom: 1rem;
     width: 100% !important;
+}
+
+.paragraph-container {
+    background-color: #161d40;
+    border-radius: 8px;
+    color: #dcdde2;
+    padding: 1rem;
 }
 /* -------------------------------------------------------------------------- */
 

@@ -1,9 +1,10 @@
 import { Row } from "antd"
+import PropTypes from 'prop-types'
 import ColConditionsData from "./ColConditionsData"
 import IlustratedWeatherState from "./IlustratedWeatherState"
 
 
-const WeatherInformation = ({ currentConditionsData, gradeSelected, loadingGeolocation }) => {
+const CurrentWeatherInformation = ({ currentConditionsData, gradeSelected, loadingGeolocation }) => {
 
     const uvLevel = currentConditionsData?.UVIndexText
     const cloudCover = currentConditionsData?.CloudCover
@@ -90,4 +91,10 @@ const WeatherInformation = ({ currentConditionsData, gradeSelected, loadingGeolo
     )
 }
 
-export default WeatherInformation
+CurrentWeatherInformation.propTypes = {
+    currentConditionsData: PropTypes.object,
+    gradeSelected: PropTypes.string.isRequired,
+    loadingGeolocation: PropTypes.bool.isRequired
+}
+
+export default CurrentWeatherInformation

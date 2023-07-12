@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getCurrentConditions, getGeopositionSearch } from "../api/accuWeatherApi"
+import { getCurrentConditions, getDailyForecastFiveDays, getGeopositionSearch } from "../api/accuWeatherApi"
 // ANT DESIGN
 import { notification } from "antd"
 const { useNotification } = notification
@@ -12,7 +12,9 @@ const useGetGeolocation = () => {
     const [api, contextHolder] = useNotification()
     const [geolocationData, setGeolocationData] = useState(undefined)
     const [currentConditionsGeolocation, setCurrentConditionsGeolocation] = useState(undefined)
+    const [dailyForecastGeolocation, setDailyForecastGeolocation] = useState(undefined)
     const [isLoading, setIsLoading] = useState(true)
+
 
     const successGeolocation = async (position) => {
         if (position) {
@@ -21,10 +23,12 @@ const useGetGeolocation = () => {
 
             if (respGeoposition.status === 200) {
                 const dataGeoposition = respGeoposition.data
-                const respConditions = await getCurrentConditions(dataGeoposition?.Key)
 
-                if (respConditions.status === 200) {
-                    const dataCurrentConditions = respConditions.data[0]
+                // Pronóstico detallado de hoy
+                const respCurrentConditions = await getCurrentConditions(dataGeoposition?.Key)
+
+                if (respCurrentConditions.status === 200) {
+                    const dataCurrentConditions = respCurrentConditions.data[0]
                     setCurrentConditionsGeolocation(dataCurrentConditions)
                     setGeolocationData({
                         key: dataGeoposition?.Key,
@@ -32,8 +36,25 @@ const useGetGeolocation = () => {
                     })
                 } else {
                     api.warning({
-                        message: 'Condiciones climáticas falló',
-                        description: 'No hemos podido obtener información climática de la ciudad mediante el uso de geolocalización.',
+                        message: 'Condiciones climáticas actuales falló',
+                        description: 'No hemos podido obtener información climática actual de la ciudad mediante el uso de geolocalización.',
+                        duration: 60
+                    })
+                }
+
+                // Pronóstico diario resumido de los 4 días siguientes
+                const respDailyForecast = await getDailyForecastFiveDays(dataGeoposition?.Key)
+
+                if (respDailyForecast.status === 200) {
+                    const textDailyForecast = respDailyForecast.data?.Headline?.Text
+                    const arrayDailyForecast = respDailyForecast.data?.DailyForecasts
+                    arrayDailyForecast?.shift()
+
+                    setDailyForecastGeolocation({ headline: textDailyForecast, dailyForecast: arrayDailyForecast })
+                } else {
+                    api.warning({
+                        message: 'Pronóstico diario falló',
+                        description: 'No hemos podido obtener información del pronóstico diario de la ciudad mediante el uso de geolocalización.',
                         duration: 60
                     })
                 }
@@ -97,7 +118,7 @@ const useGetGeolocation = () => {
         }
     }, [])
 
-    return { currentConditionsGeolocation, geolocationData, contextHolder, isLoading }
+    return { currentConditionsGeolocation, dailyForecastGeolocation, geolocationData, contextHolder, isLoading }
 }
 
 export default useGetGeolocation

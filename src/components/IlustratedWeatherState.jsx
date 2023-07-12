@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import { dayDDMonthYYYY } from '../utils/dateFormat'
+// ANTD
 import { Col, Skeleton, Typography } from 'antd'
-import { newDateDayMonthYYYY } from '../utils/dateFormat'
+const { Paragraph } = Typography
+// ---------------------------------------------
 
 
 const IlustratedWeatherState = ({ weatherState, gradeSelected, currentTemperature, maxTemp, loadingGeolocation }) => {
@@ -13,37 +16,37 @@ const IlustratedWeatherState = ({ weatherState, gradeSelected, currentTemperatur
 
     const [weatherIcon, setWeatherIcon] = useState('icons/estaciones.png')
     const [weatherImg, setWeatherImg] = useState('weather-states/all-weathers.webp')
-    const toDay = newDateDayMonthYYYY()
+    const toDay = dayDDMonthYYYY()
 
 
     useEffect(() => {
         if (weatherState === 'Lluvias y nevadas') {
-            setWeatherImg('weather-states/lluvia-nieve.webp')
             setWeatherIcon('icons/nieve.png')
+            setWeatherImg('weather-states/lluvia-nieve.webp')
         }
         if (weatherState === 'Despejado' || weatherState === 'Soleado') {
-            setWeatherImg('weather-states/despejado.webp')
             setWeatherIcon('icons/despejado.png')
+            setWeatherImg('weather-states/despejado.webp')
         }
         if (weatherState === 'Nublado' || weatherState === 'Mayormente nublado') {
-            setWeatherImg('weather-states/nublado.webp')
             setWeatherIcon('icons/nublado.png')
-        }
-        if (weatherState === 'Chaparrón' || weatherState === 'Lluvias' || weatherState === 'Chaparrones') {
-            setWeatherImg('weather-states/lluvia.webp')
-            setWeatherIcon('icons/lluvia.png')
+            setWeatherImg('weather-states/nublado.webp')
         }
         if (weatherState === 'Niebla leve' || weatherState === 'Niebla densa' || weatherState === 'Soleado con bruma') {
-            setWeatherImg('weather-states/niebla-leve.webp')
             setWeatherIcon('icons/niebla.png')
+            setWeatherImg('weather-states/niebla-leve.webp')
         }
         if (weatherState === 'Mayormente despejado' || weatherState === 'Algunas nubes' || weatherState === 'Mayormente soleado') {
-            setWeatherImg('weather-states/mayormente-despejado.webp')
             setWeatherIcon('icons/soleado.png')
+            setWeatherImg('weather-states/mayormente-despejado.webp')
         }
         if (weatherState === 'Parcialmente nublado' || weatherState === 'Parcialmente soleado' || weatherState === 'Nubes y sol') {
-            setWeatherImg('weather-states/parcialmente-nublado.webp')
             setWeatherIcon('icons/parcialmente-nublado.png')
+            setWeatherImg('weather-states/parcialmente-nublado.webp')
+        }
+        if (weatherState === 'Chaparrón' || weatherState === 'Lluvias' || weatherState === 'Chaparrones' || weatherState === 'Lluvias leves') {
+            setWeatherIcon('icons/lluvia.png')
+            setWeatherImg('weather-states/lluvia.webp')
         }
     }, [weatherState])
 
@@ -74,20 +77,20 @@ const IlustratedWeatherState = ({ weatherState, gradeSelected, currentTemperatur
                                     alt="Icono ilustrativo del estado del clima actual."
                                 />
                             }
-                            <Typography className="text-over-top-left">
+                            <Paragraph className="text-over-top-left">
                                 {weatherState}
                                 <br />
                                 {
                                     currentTemperature &&
                                     `${realTemperature < maxTemp ? realTemperature : maxTemp}${gradeSelected}`
                                 }
-                            </Typography>
+                            </Paragraph>
                         </Col>
 
                         <Col span={24} align='center'>
-                            <Typography.Paragraph strong>
+                            <Paragraph className='paragraph-container'>
                                 {toDay}
-                            </Typography.Paragraph>
+                            </Paragraph>
                         </Col>
                     </>
             }

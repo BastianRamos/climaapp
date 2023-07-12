@@ -2,7 +2,8 @@
 import { useEffect, useState } from "react"
 import Header from "./Header"
 import Footer from "./Footer"
-import WeatherInformation from "./WeatherInformation"
+import DailyForecastWeather from "./DailyForecastWeather"
+import CurrentWeatherInformation from "./CurrentWeatherInformation"
 //ANT DESIGN
 import { ConfigProvider, theme } from "antd"
 const { darkAlgorithm } = theme
@@ -13,6 +14,7 @@ const App = () => {
 
     const [gradeSelected, setGradeSelected] = useState('°C')
     const [currentConditionsData, setCurrentConditionsData] = useState({})
+    const [dailyForecastData, setDailyForecastData] = useState({})
     const [loadingGeolocation, setLoadingGeolocation] = useState(true)
 
 
@@ -32,14 +34,20 @@ const App = () => {
         <ConfigProvider theme={{ algorithm: darkAlgorithm }}>
             <Header
                 setCurrentConditionsData={setCurrentConditionsData}
+                setDailyForecastData={setDailyForecastData}
                 gradeSelected={gradeSelected}
                 setGradeSelected={setGradeSelected}
                 setLoadingGeolocation={setLoadingGeolocation}
             />
             <main>
-                <WeatherInformation
+                <CurrentWeatherInformation
                     currentConditionsData={currentConditionsData}
                     gradeSelected={gradeSelected}
+                    loadingGeolocation={loadingGeolocation}
+                />
+
+                <DailyForecastWeather
+                    data={dailyForecastData}
                     loadingGeolocation={loadingGeolocation}
                 />
             </main>
