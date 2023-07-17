@@ -7,25 +7,28 @@ import CurrentWeatherInformation from "./CurrentWeatherInformation"
 //ANT DESIGN
 import { ConfigProvider, theme } from "antd"
 const { darkAlgorithm } = theme
-// -----------------------------------------
 
 
-const App = () => {
+
+function App() {
 
     const [gradeSelected, setGradeSelected] = useState('°C')
     const [currentConditionsData, setCurrentConditionsData] = useState({})
-    const [dailyForecastData, setDailyForecastData] = useState({})
+    const [dailyForecastData, setDailyForecastData] = useState(undefined)
     const [loadingGeolocation, setLoadingGeolocation] = useState(true)
+    const [isDay, setIsDay] = useState(false)
 
 
     useEffect(() => {
         if (currentConditionsData) {
-            const isDay = currentConditionsData.IsDayTime
+            const isDayNow = currentConditionsData.IsDayTime
 
-            if (isDay)
+            if (isDayNow)
                 document.body.className = 'dayBackground'
             else
                 document.body.className = 'nightBackground'
+
+            setIsDay(isDayNow)
         }
     }, [currentConditionsData])
 
@@ -44,11 +47,13 @@ const App = () => {
                     currentConditionsData={currentConditionsData}
                     gradeSelected={gradeSelected}
                     loadingGeolocation={loadingGeolocation}
+                    isDay={isDay}
                 />
 
                 <DailyForecastWeather
                     data={dailyForecastData}
                     loadingGeolocation={loadingGeolocation}
+                    isDay={isDay}
                 />
             </main>
             <Footer />

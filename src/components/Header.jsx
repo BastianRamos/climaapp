@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react"
 import PropTypes from 'prop-types'
-import { getCurrentConditions, getLocationKey } from "../api/accuWeatherApi"
 import useGetGeolocation from "../hooks/useGetGeolocation"
-
+import { getCurrentConditions, getLocationKey } from "../api/accuWeatherApi"
 //ANTD
 import { Col, Input, Row, AutoComplete, Radio, Divider, Spin, notification } from "antd"
 const { Search } = Input
 const { useNotification } = notification
 
 
-const Header = ({ setCurrentConditionsData, setDailyForecastData, gradeSelected, setGradeSelected, setLoadingGeolocation }) => {
+
+function Header({ setCurrentConditionsData, setDailyForecastData, gradeSelected, setGradeSelected, setLoadingGeolocation }) {
 
     const [api, contextHolder] = useNotification()
     const [isLoading, setIsLoading] = useState(false)

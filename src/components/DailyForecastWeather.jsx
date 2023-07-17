@@ -1,26 +1,42 @@
 import PropTypes from 'prop-types'
 import DailyForecastInformation from './DailyForecastInformation';
 // ANTD
-import { Col, Row, Typography, Carousel } from 'antd'
+import { Col, Row, Typography, Carousel, Skeleton } from 'antd'
 const { Paragraph } = Typography
 // -------------------------------------------------
 import '../css/dailyForecast.css'
 
 
 
-function DailyForecastWeather({ data, loadingGeolocation }) {
+function DailyForecastWeather({ data, loadingGeolocation, isDay }) {
+
+    const background = isDay ? 'rgba(23, 34, 87, .3)' : 'rgba(22,29,64,.7)'
+    const backgroundCarousel = isDay ? 'rgba(23, 34, 87, .3)' : 'rgba(22,29,64,.3)'
 
     return (
         <Row>
             {
-                data &&
+                loadingGeolocation &&
+                <>
+                    <Skeleton.Input block active size='large' />
+                    <Col span={24} align='center'>
+                        <div style={{ width: '50%' }}>
+                            <Skeleton active size='small' />
+                        </div>
+                    </Col>
+                </>
+            }
+
+            {
+                data && !loadingGeolocation &&
                 <>
                     <Col span={24} align='center'>
-                        <Paragraph className='paragraph-container'>
+                        <Paragraph className='paragraph-container' style={{ backgroundColor: background }}>
                             {data.headline}
                         </Paragraph>
-
-                        <Carousel className='carousel-style'>
+                    </Col>
+                    <Col span={24} >
+                        <Carousel className='carousel-style' style={{ backgroundColor: backgroundCarousel }}>
                             {data.dailyForecast?.map((day, index) => {
                                 return (
                                     <div key={index}>
@@ -40,6 +56,5 @@ DailyForecastWeather.propTypes = {
     data: PropTypes.object,
     loadingGeolocation: PropTypes.bool.isRequired
 }
-
 
 export default DailyForecastWeather

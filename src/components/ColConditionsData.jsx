@@ -2,7 +2,11 @@ import PropTypes from 'prop-types'
 import { Col, Typography, Skeleton } from "antd"
 
 
-const ColConditionsData = ({ title, value, valueSymbol, loadingGeolocation }) => {
+
+function ColConditionsData({ title, value, valueSymbol, loadingGeolocation, isDay }) {
+
+    const background = isDay ? 'rgba(23, 34, 87, .3)' : 'rgba(22,29,64,.7)'
+
     return (
         <>
             {
@@ -16,7 +20,7 @@ const ColConditionsData = ({ title, value, valueSymbol, loadingGeolocation }) =>
                         />
                     </Col>
                     :
-                    <Col xs={11} sm={5} className="card-weather-information">
+                    <Col xs={11} sm={5} className="card-weather-information" style={{ backgroundColor: background }}>
                         <Typography.Text>{title}</Typography.Text>
                         <Typography.Text strong className='font-medium'>{value} {valueSymbol}</Typography.Text>
                     </Col>

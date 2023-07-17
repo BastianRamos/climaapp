@@ -4,7 +4,8 @@ import ColConditionsData from "./ColConditionsData"
 import IlustratedWeatherState from "./IlustratedWeatherState"
 
 
-const CurrentWeatherInformation = ({ currentConditionsData, gradeSelected, loadingGeolocation }) => {
+
+function CurrentWeatherInformation({ currentConditionsData, gradeSelected, loadingGeolocation, isDay }) {
 
     const uvLevel = currentConditionsData?.UVIndexText
     const cloudCover = currentConditionsData?.CloudCover
@@ -38,6 +39,7 @@ const CurrentWeatherInformation = ({ currentConditionsData, gradeSelected, loadi
                 currentTemperature={currentTemperature}
                 maxTemp={maxTemp}
                 loadingGeolocation={loadingGeolocation}
+                isDay={isDay}
             />
 
             <ColConditionsData
@@ -45,22 +47,26 @@ const CurrentWeatherInformation = ({ currentConditionsData, gradeSelected, loadi
                 value={maxTemp}
                 valueSymbol={gradeSelected}
                 loadingGeolocation={loadingGeolocation}
+                isDay={isDay}
             />
             <ColConditionsData
                 title="Mínima"
                 value={minTemp}
                 valueSymbol={gradeSelected}
                 loadingGeolocation={loadingGeolocation}
+                isDay={isDay}
             />
             <ColConditionsData
                 title="Nivel de UV"
                 value={uvLevel}
                 loadingGeolocation={loadingGeolocation}
+                isDay={isDay}
             />
             <ColConditionsData
                 title="Precipitaciones"
                 value={precipitation}
                 loadingGeolocation={loadingGeolocation}
+                isDay={isDay}
             />
             {
                 !loadingGeolocation &&
@@ -69,21 +75,25 @@ const CurrentWeatherInformation = ({ currentConditionsData, gradeSelected, loadi
                         title="Humedad"
                         value={humidity}
                         valueSymbol="%"
+                        isDay={isDay}
                     />
                     <ColConditionsData
                         title="Visibilidad"
                         value={visibility}
                         valueSymbol="km"
+                        isDay={isDay}
                     />
                     <ColConditionsData
                         title="Cobertura nubosa"
                         value={cloudCover}
                         valueSymbol="%"
+                        isDay={isDay}
                     />
                     <ColConditionsData
                         title="Velocidad del viento"
                         value={windSpeed}
                         valueSymbol="km/h"
+                        isDay={isDay}
                     />
                 </>
             }

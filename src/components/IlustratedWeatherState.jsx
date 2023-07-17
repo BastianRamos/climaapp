@@ -7,7 +7,10 @@ const { Paragraph } = Typography
 // ---------------------------------------------
 
 
-const IlustratedWeatherState = ({ weatherState, gradeSelected, currentTemperature, maxTemp, loadingGeolocation }) => {
+
+function IlustratedWeatherState({ weatherState, gradeSelected, currentTemperature, maxTemp, loadingGeolocation, isDay }) {
+
+    const background = isDay ? 'rgba(23, 34, 87, .3)' : 'rgba(22,29,64,.7)'
 
     const realTemperature = currentTemperature && Math.trunc(gradeSelected === '°C'
         ? currentTemperature.Metric.Value
@@ -56,11 +59,14 @@ const IlustratedWeatherState = ({ weatherState, gradeSelected, currentTemperatur
             {
                 loadingGeolocation
                     ?
-                    <Skeleton.Image
-                        className='skeleton-ilustrated-weather'
-                        loading={loadingGeolocation}
-                        active
-                    />
+                    <>
+                        <Skeleton.Image
+                            className='skeleton-ilustrated-weather'
+                            loading={loadingGeolocation}
+                            active
+                        />
+                        <Skeleton.Input size='large' active block />
+                    </>
                     :
                     <>
                         <Col span={24} className="short-container">
@@ -88,7 +94,7 @@ const IlustratedWeatherState = ({ weatherState, gradeSelected, currentTemperatur
                         </Col>
 
                         <Col span={24} align='center'>
-                            <Paragraph className='paragraph-container'>
+                            <Paragraph className='paragraph-container' style={{ backgroundColor: background }}>
                                 {toDay}
                             </Paragraph>
                         </Col>

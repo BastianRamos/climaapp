@@ -51,6 +51,16 @@ a:hover{
     margin-top: auto;
 }
 
+.all-center{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.ml-1{
+    margin-left: 1rem;
+}
+
 .cover-img{
     border-radius: 8px;
     height: 100%;
@@ -60,13 +70,12 @@ a:hover{
 
 .short-container{
     height: 30vh;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     width: 60vw;
 }
 
 .card-weather-information{
     align-items: center;
-    background-color: #161d40;
     border-radius: 8px;
     display: grid;
     height: 15vh;
@@ -108,10 +117,18 @@ a:hover{
 }
 
 .paragraph-container {
-    background-color: #161d40;
     border-radius: 8px;
     color: #dcdde2;
     padding: 1rem;
+}
+
+/* ANTD: Carousel dots */
+.ant-carousel .slick-dots li button {
+    background: #fff;
+}
+
+.ant-carousel .slick-dots li.slick-active button {
+    background: lightskyblue;
 }
 /* -------------------------------------------------------------------------- */
 
