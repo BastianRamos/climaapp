@@ -3,8 +3,6 @@ import DailyForecastInformation from './DailyForecastInformation';
 // ANTD
 import { Col, Row, Typography, Carousel, Skeleton } from 'antd'
 const { Paragraph } = Typography
-// -------------------------------------------------
-import '../css/dailyForecast.css'
 
 
 

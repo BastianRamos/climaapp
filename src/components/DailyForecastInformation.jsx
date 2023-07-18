@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { dayDD } from '../utils/dateFormat'
 // ANTD
-import { Row, Col, Typography, Space } from 'antd'
+import { Row, Col, Typography } from 'antd'
 const { Title } = Typography
 
 
@@ -16,8 +16,8 @@ function DailyForecastInformation({ day }) {
 
     useEffect(() => {
         if (day) {
-            const max = day.Temperature.Maximum.Value
-            const min = day.Temperature.Minimum.Value
+            const max = Math.trunc(day.Temperature.Maximum.Value)
+            const min = Math.trunc(day.Temperature.Minimum.Value)
             const dayText = day.Day.IconPhrase
             const nightText = day.Night.IconPhrase
 
@@ -35,38 +35,32 @@ function DailyForecastInformation({ day }) {
                 <Title keyboard>{dayDD(day.Date)}</Title>
             </Col>
 
-            <Col sm={12}>
+            <Col sm={24}>
                 <Row className='all-center'>
-                    <Col span={6} align='right'>
-                        <img src='icons/alta-temperatura.webp' height={40} width={40} />
+                    <Col span={4} align='right'>
+                        <img src='icons/alta-temperatura.webp'className='icon-daily-forecast' alt='Icono alta temperatura' />
                     </Col>
-                    <Col span={18}>
-                        <Title className='ml-1' level={3} type='secondary'>Máxima: {maxTemp} °C</Title>
+                    <Col span={8}>
+                        <Title className='ml-1' level={3} type='secondary'>{maxTemp}°C</Title>
                     </Col>
-                    <Col span={6} align='right'>
+                    <Col span={4} align='right'>
+                        <img src='icons/baja-temperatura.webp' height={40} width={40} />
+                    </Col>
+                    <Col span={8}>
+                        <Title className='ml-1' level={4} type='secondary'>{minTemp}°C</Title>
+                    </Col>
+
+                    <Col span={4} align='right'>
                         <img src='icons/dia.webp' height={40} width={40} />
                     </Col>
-                    <Col span={18}>
-                        <Title className='ml-1' level={4} type='secondary'>Por el día {dayDescription}</Title>
-
+                    <Col span={8}>
+                        <Title className='ml-1' level={5} type='secondary'>{dayDescription}</Title>
                     </Col>
-                </Row>
-            </Col>
-
-            <Col span={12}>
-                <Row className='all-center'>
-                    <Col span={8} align='right'>
-                        <img src='icons/baja-temperatura.webp' height={40} width={40} />
-
-                    </Col>
-                    <Col span={16}>
-                        <Title className='ml-1' level={3} type='secondary'>Mínima: {minTemp} °C</Title>
-                    </Col>
-                    <Col span={8} align='right'>
+                    <Col span={4} align='right'>
                         <img src='icons/noche.webp' height={40} width={40} />
                     </Col>
-                    <Col span={16}>
-                        <Title className='ml-1' level={4} type='secondary'>Por la noche {nightDescription}</Title>
+                    <Col span={8}>
+                        <Title className='ml-1' level={5} type='secondary'>{nightDescription}</Title>
                     </Col>
                 </Row>
             </Col>
