@@ -23,7 +23,7 @@ a:hover{
 
 /* CLASSES */
 .ant-spin-text{
-    color: azure;
+    color: #FFFFFF;
 }
 
 .nightBackground{
@@ -57,8 +57,24 @@ a:hover{
     justify-content: center;
 }
 
+.border-radius-8{
+    border-radius: 8px;
+}
+
 .ml-1{
     margin-left: 1rem;
+}
+
+.mt-1{
+    margin-top: 1rem;
+}
+
+.mb-1{
+    margin-bottom: 1rem;
+}
+
+.mt-2{
+    margin-top: 2rem;
 }
 
 .cover-img{
@@ -118,26 +134,27 @@ a:hover{
 
 .paragraph-container {
     border-radius: 8px;
-    color: #dcdde2;
     padding: 1rem;
 }
 
 .icon-daily-forecast{
-    width: 40px;
     height: 40px;
+    width: 40px;
 }
 
 .carousel-style {
     border: 1px solid rgba(110, 109, 101, .2);
     border-radius: 8px;
     height: 50vh;
+    margin-bottom: 2rem;
     margin-top: 2rem;
     padding:1rem;
 };
 
 /* ANTD: Carousel dots */
-.ant-carousel .slick-dots li button {
-    background: #fff;
+.slick-dots li button {
+    background: #FFF;
+    color: #FFF;
 }
 
 .ant-carousel .slick-dots li.slick-active button {
@@ -151,6 +168,13 @@ a:hover{
 #logoClimaap{
     height: 60px;
     width: 60px;
+}
+
+#containerAccuweatherLogo{
+    background-color: lightsteelblue;
+     border-radius: 8px;
+     padding: .2rem;
+     width: 133px;
 }
 /* ------------------------------------------------------------------------- */
 

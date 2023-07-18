@@ -38,26 +38,26 @@ function DailyForecastInformation({ day }) {
             <Col sm={24}>
                 <Row className='all-center'>
                     <Col span={4} align='right'>
-                        <img src='icons/alta-temperatura.webp'className='icon-daily-forecast' alt='Icono alta temperatura' />
+                        <img src='icons/alta-temperatura.webp' className='icon-daily-forecast mt-1' alt='Icono alta temperatura' />
                     </Col>
                     <Col span={8}>
-                        <Title className='ml-1' level={3} type='secondary'>{maxTemp}°C</Title>
+                        <Title className='ml-1' level={5} type='secondary'>Máxima {maxTemp}°C</Title>
                     </Col>
                     <Col span={4} align='right'>
-                        <img src='icons/baja-temperatura.webp' height={40} width={40} />
+                        <img src='icons/baja-temperatura.webp' className='icon-daily-forecast mt-1' />
                     </Col>
                     <Col span={8}>
-                        <Title className='ml-1' level={4} type='secondary'>{minTemp}°C</Title>
+                        <Title className='ml-1' level={5} type='secondary'>Mínima {minTemp}°C</Title>
                     </Col>
 
-                    <Col span={4} align='right'>
-                        <img src='icons/dia.webp' height={40} width={40} />
+                    <Col span={4} align='right' >
+                        <img className='icon-daily-forecast mt-1' src='icons/dia.webp' />
                     </Col>
                     <Col span={8}>
-                        <Title className='ml-1' level={5} type='secondary'>{dayDescription}</Title>
+                        <Title className='ml-1' level={5} type='secondary' >{dayDescription}</Title>
                     </Col>
                     <Col span={4} align='right'>
-                        <img src='icons/noche.webp' height={40} width={40} />
+                        <img className='icon-daily-forecast mt-1' src='icons/noche.webp' />
                     </Col>
                     <Col span={8}>
                         <Title className='ml-1' level={5} type='secondary'>{nightDescription}</Title>

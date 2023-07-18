@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import PropTypes from 'prop-types'
 import useGetGeolocation from "../hooks/useGetGeolocation"
-import { getCurrentConditions, getLocationKey } from "../api/accuWeatherApi"
+import { getCurrentConditions, getDailyForecastFiveDays, getLocationKey } from "../api/accuWeatherApi"
 //ANTD
 import { Col, Input, Row, AutoComplete, Radio, Divider, Spin, notification } from "antd"
 const { Search } = Input
@@ -68,6 +68,7 @@ function Header({ setCurrentConditionsData, setDailyForecastData, gradeSelected,
             location.Country.LocalizedName === citySelectedNameSplit[1].trim()
         )
 
+        // Pronóstico de hoy
         const citySelectedKey = citySelectedObj[0]?.Key
         const resp = await getCurrentConditions(citySelectedKey)
 
@@ -78,6 +79,24 @@ function Header({ setCurrentConditionsData, setDailyForecastData, gradeSelected,
             api.error({
                 message: 'Problemas de Conexión',
                 description: 'Tenemos problemas para acceder a la información climática en estos momentos.',
+                duration: 60
+            })
+            return
+        }
+
+        // Pronóstico de los próximos 4 días
+        const respDailyForecast = await getDailyForecastFiveDays(citySelectedKey)
+
+        if (respDailyForecast.status === 200) {
+            const textDailyForecast = respDailyForecast.data?.Headline?.Text
+            const arrayDailyForecast = respDailyForecast.data?.DailyForecasts
+            arrayDailyForecast?.shift()
+
+            setDailyForecastData({ headline: textDailyForecast, dailyForecast: arrayDailyForecast })
+        } else {
+            api.warning({
+                message: 'Pronóstico diario falló',
+                description: 'No hemos podido obtener información del pronóstico diario de la ciudad seleccionada.',
                 duration: 60
             })
         }
