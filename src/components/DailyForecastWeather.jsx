@@ -34,7 +34,7 @@ function DailyForecastWeather({ data, loadingGeolocation, isDay }) {
                         </Paragraph>
                     </Col>
                     <Col span={24} >
-                        <Carousel className='carousel-style' style={{ backgroundColor: backgroundCarousel }}>
+                        <Carousel className='carousel-style' style={{ backgroundColor: backgroundCarousel }} autoplay dotPosition='right'>
                             {data.dailyForecast?.map((day, index) => {
                                 return (
                                     <div key={index}>
