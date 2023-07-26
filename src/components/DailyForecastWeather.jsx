@@ -28,7 +28,7 @@ function DailyForecastWeather({ data, loadingGeolocation, isDay }) {
             {
                 data && !loadingGeolocation &&
                 <>
-                    <Col span={24} align='center'>
+                    <Col span={24} align='center' >
                         <Paragraph className='paragraph-container' style={{ backgroundColor: background }}>
                             {data.headline}
                         </Paragraph>

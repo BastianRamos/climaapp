@@ -41,26 +41,26 @@ function DailyForecastInformation({ day }) {
                         <img src='icons/alta-temperatura.webp' className='icon-daily-forecast' alt='Icono temperatura máxima' />
                     </Col>
                     <Col xs={10} sm={8}>
-                        <Paragraph className='ml-1 mt-1 font-small' type='secondary'>Máxima {maxTemp}°C</Paragraph>
+                        <Paragraph className='ml-1 mt-1 font-small'>Máxima {maxTemp}°C</Paragraph>
                     </Col>
                     <Col xs={2} sm={4}>
                         <img src='icons/baja-temperatura.webp' className='icon-daily-forecast' alt='Icono temperatura mínima' />
                     </Col>
                     <Col xs={10} sm={8}>
-                        <Paragraph className='ml-1 mt-1 font-small' type='secondary'>Mínima {minTemp}°C</Paragraph>
+                        <Paragraph className='ml-1 mt-1 font-small'>Mínima {minTemp}°C</Paragraph>
                     </Col>
 
                     <Col xs={2} sm={4}>
                         <img className='icon-daily-forecast' src='icons/dia.webp' alt='Icono de día' />
                     </Col>
                     <Col xs={10} sm={8}>
-                        <Paragraph className='ml-1 mt-1 font-small' type='secondary' >{dayDescription}</Paragraph>
+                        <Paragraph className='ml-1 mt-1 font-small' >{dayDescription}</Paragraph>
                     </Col>
                     <Col xs={2} sm={4}>
                         <img className='icon-daily-forecast' src='icons/noche.webp' alt='Icono de noche' />
                     </Col>
                     <Col xs={10} sm={8}>
-                        <Paragraph className='ml-1 mt-1 font-small' type='secondary'>{nightDescription}</Paragraph>
+                        <Paragraph className='ml-1 mt-1 font-small'>{nightDescription}</Paragraph>
                     </Col>
                 </Row>
             </Col>

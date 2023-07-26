@@ -18,7 +18,7 @@ function Footer() {
             </Col>
             <Col span={24} align='center' className="mb-1 mt-2">
                 <Typography.Paragraph type="secondary" code>
-                    ClimaAPP v1.12
+                    ClimaAPP v1.13
                 </Typography.Paragraph>
                 <Typography.Paragraph type="secondary">
                     Desarrollado por <a href={URL_PORTFOLIO} target="_blank">Bastian Ramos Saumontt</a>
