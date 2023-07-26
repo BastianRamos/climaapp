@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { dayDD } from '../utils/dateFormat'
 // ANTD
 import { Row, Col, Typography } from 'antd'
-const { Title } = Typography
+const { Title, Paragraph } = Typography
 
 
 
@@ -37,30 +37,30 @@ function DailyForecastInformation({ day }) {
 
             <Col sm={24}>
                 <Row className='all-center'>
-                    <Col span={4} align='right'>
-                        <img src='icons/alta-temperatura.webp' className='icon-daily-forecast mt-1' alt='Icono alta temperatura' />
+                    <Col xs={2} sm={4}>
+                        <img src='icons/alta-temperatura.webp' className='icon-daily-forecast' alt='Icono temperatura máxima' />
                     </Col>
-                    <Col span={8}>
-                        <Title className='ml-1' level={5} type='secondary'>Máxima {maxTemp}°C</Title>
+                    <Col xs={10} sm={8}>
+                        <Paragraph className='ml-1 mt-1 font-small' type='secondary'>Máxima {maxTemp}°C</Paragraph>
                     </Col>
-                    <Col span={4} align='right'>
-                        <img src='icons/baja-temperatura.webp' className='icon-daily-forecast mt-1' />
+                    <Col xs={2} sm={4}>
+                        <img src='icons/baja-temperatura.webp' className='icon-daily-forecast' alt='Icono temperatura mínima' />
                     </Col>
-                    <Col span={8}>
-                        <Title className='ml-1' level={5} type='secondary'>Mínima {minTemp}°C</Title>
+                    <Col xs={10} sm={8}>
+                        <Paragraph className='ml-1 mt-1 font-small' type='secondary'>Mínima {minTemp}°C</Paragraph>
                     </Col>
 
-                    <Col span={4} align='right' >
-                        <img className='icon-daily-forecast mt-1' src='icons/dia.webp' />
+                    <Col xs={2} sm={4}>
+                        <img className='icon-daily-forecast' src='icons/dia.webp' alt='Icono de día' />
                     </Col>
-                    <Col span={8}>
-                        <Title className='ml-1' level={5} type='secondary' >{dayDescription}</Title>
+                    <Col xs={10} sm={8}>
+                        <Paragraph className='ml-1 mt-1 font-small' type='secondary' >{dayDescription}</Paragraph>
                     </Col>
-                    <Col span={4} align='right'>
-                        <img className='icon-daily-forecast mt-1' src='icons/noche.webp' />
+                    <Col xs={2} sm={4}>
+                        <img className='icon-daily-forecast' src='icons/noche.webp' alt='Icono de noche' />
                     </Col>
-                    <Col span={8}>
-                        <Title className='ml-1' level={5} type='secondary'>{nightDescription}</Title>
+                    <Col xs={10} sm={8}>
+                        <Paragraph className='ml-1 mt-1 font-small' type='secondary'>{nightDescription}</Paragraph>
                     </Col>
                 </Row>
             </Col>

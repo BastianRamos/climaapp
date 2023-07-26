@@ -46,6 +46,10 @@ a:hover{
     font-size: 1.4rem;
 }
 
+.font-small{
+    font-size: .7rem;
+}
+
 .center-auto-margin{
     margin-bottom: auto;
     margin-top: auto;
@@ -138,8 +142,9 @@ a:hover{
 }
 
 .icon-daily-forecast{
-    height: 40px;
-    width: 40px;
+    float: right;
+    height: 30px;
+    width: 30px;
 }
 
 .carousel-style {
@@ -189,42 +194,57 @@ a:hover{
         margin-right: 2vw;
         margin-top: 2vh;
     }
+
     .short-container{
         height: 20vh;
         width: 90vw;
     }
+
     .icon-over-bottom-right{
         bottom: 10px;
         height: 60px;
         right: 20px;
         width: 60px;
     }
+
+    .icon-daily-forecast{
+        height: 26px;
+        width: 26px;
+    }
+
     .text-over-top-left{
         font-size: 1.4rem;
         left: 20px;
         top: 10px;
     }
+
     .d-none-desktop{
         display: inline;
     }
+
     .d-none-mobile{
         display: none;
     }
+    
     .border-text-center{
         height: 10vh;
     }
+    
     .font-medium{
         font-size: 1.2rem;
     }
+    
     .card-weather-information{
         height: 8vh;
         margin-bottom: .6rem;
         padding-bottom: 0;
         padding-top: 0;
     }
+    
     .ml-1{
         margin-left: .4rem;
     }
+    
     #logoClimaap{
         margin-bottom: 1rem;
         margin-top: 1rem;
