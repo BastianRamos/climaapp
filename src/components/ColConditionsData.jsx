@@ -5,7 +5,7 @@ import { Col, Typography, Skeleton } from "antd"
 
 function ColConditionsData({ title, value, valueSymbol, loadingGeolocation, isDay }) {
 
-    const background = isDay ? 'rgba(23, 34, 87, .3)' : 'rgba(22,29,64,.7)'
+    const background = isDay ? 'rgba(23, 34, 87, .3)' : 'rgba(22,36,80,.8)'
 
     return (
         <>

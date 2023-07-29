@@ -161,19 +161,19 @@ a:hover{
     height: auto;
     margin-bottom: 2rem;
     margin-top: 2rem;
-    padding-bottom: 2rem;
+    padding-bottom: 4rem;
     padding-left:1rem;
     padding-right: 2rem;
 };
 
 /* ANTD: Carousel dots */
 .slick-dots li button {
-    background-color: #fff;
-    color: #fff;
+    background-color: #ffffff;
+    color: #ffffff;
 }
 
 .ant-carousel .slick-dots li.slick-active button {
-    background: lightskyblue;
+    background-color: lightskyblue;
 }
 /* -------------------------------------------------------------------------- */
 
@@ -204,7 +204,7 @@ a:hover{
     }
 
     .short-container{
-        height: 20vh;
+        height: 16vh;
         width: 90vw;
     }
 
@@ -272,11 +272,23 @@ a:hover{
     .font-small{
         font-size: .8rem;
     }
+
+    .card-weather-information{
+        height: 8vh;
+    }
+
+    .short-container{
+        height: 20vh;
+    }
 }
 
 @media screen and (min-width:769px) and (max-width:992px){
     body{
         margin-left: 10vw;
         margin-right: 10vw;
+    }
+
+    .short-container{
+        height: 20vh;
     }
 }

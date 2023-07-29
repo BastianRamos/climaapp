@@ -8,8 +8,8 @@ const { Paragraph } = Typography
 
 function DailyForecastWeather({ data, loadingGeolocation, isDay }) {
 
-    const background = isDay ? 'rgba(23, 34, 87, .3)' : 'rgba(22,29,64,.7)'
-    const backgroundCarousel = isDay ? 'rgba(23, 34, 87, .3)' : 'rgba(22,29,64,.3)'
+    const background = isDay ? 'rgba(23, 34, 87, .3)' : 'rgba(22,36,80,.8)'
+    const backgroundCarousel = isDay ? 'rgba(23, 34, 87, .3)' : 'rgba(22,36,80,.8)'
 
     return (
         <Row>
@@ -34,7 +34,7 @@ function DailyForecastWeather({ data, loadingGeolocation, isDay }) {
                         </Paragraph>
                     </Col>
                     <Col span={24} >
-                        <Carousel className='carousel-style' style={{ backgroundColor: backgroundCarousel }} autoplay>
+                        <Carousel className='carousel-style' style={{ backgroundColor: backgroundCarousel }} autoplay autoplaySpeed={8000}>
                             {data.dailyForecast?.map((day, index) => {
                                 return (
                                     <div key={index}>
