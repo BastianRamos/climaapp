@@ -9,7 +9,7 @@ function Footer() {
         <Row className="mb-1">
             <Divider />
             <Col span={12} >
-                <img className="border-radius-8" src="brs-logo.webp" alt="logo BRS" height={40} width={40} />
+                <img className="border-radius-8" src="brs circle.png" alt="logo BRS" height={40} width={40} />
             </Col>
             <Col span={12} align='right'>
                 <div id="containerAccuweatherLogo">
